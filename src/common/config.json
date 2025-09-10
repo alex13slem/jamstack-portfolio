@@ -1,0 +1,54 @@
+{
+  "en": {
+    "site_name": "alex13slem",
+    "site_description": "Hi 👋! I’m Sasha, a full-stack JavaScript developer.\nI help small businesses build fast, stylish, and SEO-optimized websites.\nI live in Belarus and work with clients all around the world.",
+    "og_image": "/media/site-info/portfolio-thumb1.png",
+    "section_hero": {
+      "epithets": [
+        "Innovative",
+        "Modern",
+        "Full-stack"
+      ],
+      "epithet_summary": "TypeScript developer",
+      "greeting": "Hi 👋! I’m Sasha, a full-stack JavaScript developer.\nI help small businesses build fast, stylish, and SEO-optimized websites.\nI live in Belarus and work with clients all around the world."
+    },
+    "section_about": {
+      "title": "About me",
+      "text": "I’m a full-stack developer who follows best development practices and leverages modern technologies to build fast and reliable web applications."
+    },
+    "section_contacts": {
+      "title": "Contacts",
+      "proposal": "Ready to start an interesting project?"
+    },
+    "hero_contact": {
+      "email": "o.s.shcherba@gmail.com",
+      "phone": "+375 (29) 623-41-63"
+    }
+  },
+  "ru": {
+    "site_name": "alex13slem",
+    "site_description": "Привет 👋! Я Саша, full-stack разработчик на JavaScript.\nПомогаю малому бизнесу создавать быстрые, стильные и SEO-оптимизированные сайты.\nЖиву в Беларуси, работаю с клиентами по всему миру.",
+    "og_image": "/media/site-info/portfolio-thumb1.png",
+    "section_hero": {
+      "epithets": [
+        "Инновативный",
+        "Современный",
+        "Full-stack"
+      ],
+      "epithet_summary": "TypeScript разработчик",
+      "greeting": "Привет 👋! Я Саша, full-stack разработчик на JavaScript.\nПомогаю малому бизнесу создавать быстрые, стильные и SEO-оптимизированные сайты.\nЖиву в Беларуси, работаю с клиентами по всему миру."
+    },
+    "section_about": {
+      "title": "Обо мне",
+      "text": "Я full-stack разработчик, который следует лучшим практикам разработки и внедряет современные технологии для создания быстрых и надёжных веб-приложений."
+    },
+    "section_contacts": {
+      "title": "Мои контакты",
+      "proposal": "Готовы начать интересный проект?"
+    },
+    "hero_contact": {
+      "email": "a.s.scherba@yandex.by",
+      "phone": "+7 980 104-1005"
+    }
+  }
+}

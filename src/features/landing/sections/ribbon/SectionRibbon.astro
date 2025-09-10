@@ -1,0 +1,28 @@
+---
+import { getLangFromUrl } from "@/i18n/utils";
+import { getTechs } from "@/lib/cruds/tech";
+import { cn } from "@/lib/utils/styles";
+
+const lang = getLangFromUrl(Astro.url);
+const techs = await getTechs(lang);
+
+const keywordsString = (
+  techs.map((tech) => tech.name).join(" · ") + " · "
+).repeat(2);
+---
+
+<section class="relative py-16 z-20 overflow-clip">
+  <p
+    class={cn(`group
+              uppercase font-extrabold text-[40px] whitespace-nowrap text-bg leading-loose
+              rotate-[3deg] md:scale-[101%]
+              origin-center select-none
+              bg-white`)}
+  >
+    <span
+      class="ribbon-animation__slideshow group-hover:-scale-y-100 transition-all duration-200 tracking-widest inline-block"
+    >
+      {keywordsString}
+    </span>
+  </p>
+</section>

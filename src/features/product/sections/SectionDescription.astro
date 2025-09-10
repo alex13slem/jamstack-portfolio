@@ -1,0 +1,36 @@
+---
+import type { ProjectWithTechs } from "@/lib/cruds/project";
+import { cn } from "@/lib/utils/styles";
+
+interface Props {
+  project: ProjectWithTechs;
+  class?: string;
+}
+
+const { project, class: className } = Astro.props;
+const { name, role, description } = project;
+---
+
+<section
+  class={cn(
+    `p-4 rounded-xl
+    bg-white/5 backdrop-blur-sm
+    border border-white/10 min-h-96`,
+    className
+  )}
+>
+  <h1
+    class={cn(`white_gradient
+              font-bold bg-clip-text text-transparent text-3xl text-right`)}
+  >
+    {name}
+  </h1>
+  <p class="text-base text-gray-300 font-medium text-right">
+    {role}
+  </p>
+  <div class="prose prose-sm md:prose-base prose-slate dark:prose-invert">
+    <blockquote>
+      <p>{description}</p>
+    </blockquote>
+  </div>
+</section>

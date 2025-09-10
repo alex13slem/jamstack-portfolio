@@ -1,0 +1,52 @@
+---
+import type { ProjectWithTechs } from "@/lib/cruds/project";
+import { cn } from "@/lib/utils/styles";
+import GithubButton from "../components/GithubButton.astro";
+import SectionBody from "../sections/SectionBody.astro";
+import SectionDescription from "../sections/SectionDescription.astro";
+import SectionTechs from "../sections/SectionTechs.astro";
+import SectionThumbnail from "../sections/SectionThumbnail.astro";
+
+interface Props {
+  project: ProjectWithTechs;
+}
+
+const { project } = Astro.props;
+const { body, github_url } = project;
+---
+
+<main class="container py-5 grid grid-cols-12 grid-flow-dense gap-4">
+  <SectionThumbnail
+    class={cn`col-span-full
+    lg:col-span-8 lg:row-span-2`}
+    {project}
+  />
+  {
+    body && (
+      <SectionBody
+        class={cn`col-span-full
+          lg:col-span-8 lg:row-start-3`}
+        {body}
+      />
+    )
+  }
+  <SectionDescription
+    class={cn`col-span-full row-span-1 row-start-4
+            sm:col-span-8 sm:row-start-2 sm:row-span-4
+            lg:row-span-1 lg:row-start-auto lg:col-span-4`}
+    {project}
+  />
+  <GithubButton
+    class={cn`row-start-2 col-span-4
+                  sm:row-start-auto
+                  xl:col-span-1`}
+    href={github_url}
+  />
+  <SectionTechs
+    class={cn`col-span-8 row-span-2 row-start-2
+    sm:col-span-4 sm:row-start-3
+    lg:row-span-2  lg:row-start-auto
+    xl:col-span-3 `}
+    techs={project.techs}
+  />
+</main>

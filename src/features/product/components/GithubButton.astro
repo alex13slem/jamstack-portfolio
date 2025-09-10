@@ -1,0 +1,25 @@
+---
+import { cn } from "@/lib/utils/styles";
+import Icon from "astro-iconify";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className } = Astro.props;
+---
+
+<button
+  class={cn(
+    `rounded-xl relative p-4
+    bg-white/5 backdrop-blur-sm
+    border border-white/10
+    flex justify-center items-center
+    text-white/60 hover:text-white/90 transition-colors`,
+    className
+  )}
+>
+  <a {href} target="_blank" class="absolute inset-0"></a>
+  <Icon name="octicon:logo-github-16" class="h-5" />
+</button>

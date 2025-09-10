@@ -9,6 +9,28 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.13.2"
+    "@astrojs/react": "^4.3.0",
+    "@astrojs/svelte": "^7.1.0",
+    "@fontsource/source-sans-3": "^5.2.8",
+    "@iconify/svelte": "^5.0.1",
+    "@tailwindcss/vite": "^4.1.12",
+    "@types/react": "^19.1.11",
+    "@types/react-dom": "^19.1.7",
+    "astro": "^5.13.2",
+    "astro-iconify": "^1.2.0",
+    "clsx": "^2.1.1",
+    "hover-effect": "^1.2.1",
+    "marked": "^16.2.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-textra": "^0.2.0",
+    "svelte": "^5.38.2",
+    "svelte-sonner": "^1.0.5",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16"
   }
 }

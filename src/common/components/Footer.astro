@@ -1,0 +1,40 @@
+---
+import Button from "@/common/components/ui/button/Button.svelte";
+import configJson from "@/common/config.json";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getSocial } from "@/lib/cruds/social";
+
+const lang = getLangFromUrl(Astro.url);
+const config = configJson[lang];
+
+const { email } = config.hero_contact;
+const { site_name } = config;
+
+const tg = await getSocial("telegram", lang);
+
+const t = useTranslations(lang);
+---
+
+<footer class="backdrop-blur-xs">
+  <hr
+    class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
+  />
+  <div
+    class="container flex flex-col md:flex-row justify-between items-center py-4 gap-4"
+  >
+    <div class="flex flex-col gap-2">
+      <a class="site-logo" href="/">
+        {site_name}
+      </a>
+      <a href={`mailto:${email}`} class="text-white/60 font-medium text-sm"
+        >{email}</a
+      >
+      <p class="text-white/60 font-medium text-sm">
+        © {new Date().getFullYear()} alex13slem. {t("all_rights_reserved")}
+      </p>
+    </div>
+    <div class="hidden md:flex gap-2">
+      <Button href={tg.url} external>{t("contact_btn_label")}</Button>
+    </div>
+  </div>
+</footer>

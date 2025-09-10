@@ -4,17 +4,10 @@ import Layout from "@/common/templates/Layout.astro";
 import LandingPage from "@/features/landing/templates/LandingPage.astro";
 import { useTranslations } from "@/i18n/utils";
 
-const t = useTranslations("en");
+const t = useTranslations("ru");
 ---
 
 <Layout>
   <SeoFragment slot="head" title={t("landing.title")} />
   <LandingPage />
 </Layout>
-
-<script>
-  import { suggestRussianVersion } from "@/i18n/utils";
-
-  document.addEventListener("DOMContentLoaded", suggestRussianVersion);
-  document.addEventListener("visibilitychange", suggestRussianVersion);
-</script>

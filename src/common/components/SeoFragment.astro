@@ -1,0 +1,33 @@
+---
+import config from "@/common/config.json";
+import { getLangFromUrl } from "@/i18n/utils";
+import OpenGraphFragment from "./open-graph-fragment/OpenGraphFragment.astro";
+import type { OpenGraphFragmentProps } from "./open-graph-fragment/types";
+
+interface Props extends Omit<OpenGraphFragmentProps, "siteName"> {
+  keywords?: string;
+  noindex?: boolean;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const siteName = config[lang].site_name;
+const baseOgImageUrl = config[lang].og_image;
+const {
+  keywords,
+  description: _description,
+  title,
+  noindex = false,
+  imageUrls = { fb: baseOgImageUrl },
+  ...props
+} = Astro.props;
+
+const description = _description || config[lang].site_description;
+---
+
+<>
+  {keywords && <meta name="keywords" content={keywords} />}
+  <meta name="description" content={description} />
+  <OpenGraphFragment {description} {title} {siteName} {imageUrls} {...props} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <title>{siteName} · {title}</title>
+</>

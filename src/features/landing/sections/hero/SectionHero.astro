@@ -1,0 +1,44 @@
+---
+import linesPNG from "@/assets/img/Lines.png";
+import Button from "@/common/components/ui/button/Button.svelte";
+import configJson from "@/common/config.json";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getSocial } from "@/lib/cruds/social";
+import { Image } from "astro:assets";
+import { parse } from "marked";
+import HeroEpithets from "./HeroEpithets";
+
+const lang = getLangFromUrl(Astro.url);
+const config = configJson[lang];
+
+const { section_hero } = config;
+
+const tg = await getSocial("telegram", lang);
+const t = useTranslations(lang);
+---
+
+<section class="pb-28 pt-16 md:py-28">
+  <div class="container relative z-1 max-w-4xl grid grid-cols-1 gap-8">
+    <Image
+      src={linesPNG}
+      alt="Lines"
+      class="-translate-y-[1px] w-full absolute top-0 pointer-events-none -z-10"
+    />
+    <h1
+      class="text-center text-4xl sm:text-5xl md:text-7xl font-bold mt-1 animated-colors__gradient bg-clip-text text-transparent select-none"
+    >
+      <HeroEpithets epithets={section_hero.epithets} client:only="react" />
+      <br />
+      {section_hero.epithet_summary}
+    </h1>
+    <article
+      class="text-cyangrey text-lg text-center mx-auto max-w-xl"
+      set:html={parse(section_hero.greeting)}
+    />
+    <footer class="text-center flex justify-center">
+      <Button href={tg.url} external variant="fill">
+        {t("contact_btn_label")}
+      </Button>
+    </footer>
+  </div>
+</section>

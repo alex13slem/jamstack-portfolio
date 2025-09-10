@@ -1,0 +1,26 @@
+---
+import { cn } from "@/lib/utils/styles";
+import { parse } from "marked";
+
+interface Props {
+  body: string;
+  class?: string;
+}
+
+const { body, class: className } = Astro.props;
+---
+
+<section
+  class={cn(
+    `p-4 rounded-xl
+    bg-white/5 backdrop-blur-sm
+    border border-white/10`,
+    className
+  )}
+>
+  <div
+    class="prose prose-sm md:prose-base prose-slate dark:prose-invert max-w-none"
+  >
+    <Fragment set:html={parse(body)} />
+  </div>
+</section>

@@ -1,0 +1,214 @@
+backend:
+  name: github
+  branch: main
+  repo: alex13slem/jamstack-portfolio
+
+media_folder: public/media
+public_folder: /media
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+
+editor:
+  preview: false
+i18n:
+  structure: multiple_folders
+  locales: ["en", "ru"]
+
+collections:
+  - name: tech
+    label: Technologies
+    label_singular: Technology
+    folder: src/content/tech
+    media_folder: /public/media/tech
+    public_folder: /media/tech
+    create: true
+    i18n: true
+    slug: "{{id}}"
+
+    fields:
+      - name: id
+        label: ID
+        i18n: duplicate
+
+      - name: name
+        label: Name
+        i18n: translate
+
+      - name: url
+        label: URL
+        i18n: duplicate
+
+      - name: iconify_id
+        label: Iconify ID
+        i18n: duplicate
+
+  - name: project
+    label: Projects
+    label_singular: Project
+    folder: src/content/project
+    media_folder: /public/media/project
+    public_folder: /media/project
+    create: true
+    i18n: true
+    slug: "{{id}}"
+
+    fields:
+      - name: id
+        label: ID
+        i18n: duplicate
+
+      - name: name
+        label: Name
+        i18n: translate
+
+      - widget: text
+        name: description
+        label: Description
+        i18n: translate
+
+      - widget: markdown
+        name: body
+        label: Body
+        i18n: translate
+
+      - name: role
+        label: Role
+        i18n: translate
+
+      - name: site_url
+        label: Site Link
+        i18n: duplicate
+        required: false
+
+      - name: github_url
+        label: GitHub Link
+        i18n: duplicate
+
+      - widget: image
+        name: image_cover
+        label: Image Cover
+        i18n: duplicate
+
+      - widget: image
+        name: image_preview
+        label: Image Preview
+        i18n: duplicate
+
+      - widget: relation
+        collection: tech
+        i18n: duplicate
+        name: techs
+        multiple: true
+        label: Technologies
+        required: false
+
+  - name: social
+    label: Social
+    label_singular: Social
+    folder: src/content/social
+    media_folder: /public/media/social
+    public_folder: /media/social
+    create: true
+    i18n: true
+    slug: "{{id}}"
+
+    fields:
+      - name: id
+        label: ID
+        i18n: duplicate
+
+      - name: name
+        label: Name
+        i18n: translate
+
+      - name: url
+        label: URL
+        i18n: duplicate
+
+      - name: iconify_id
+        label: Iconify ID
+        i18n: duplicate
+
+singletons:
+  - name: site_info
+    label: Site Info
+    file: src/common/config.json
+    format: json
+    media_folder: /public/media/site-info
+    public_folder: /media/site-info
+    i18n: true
+
+    fields:
+      - name: site_name
+        label: Site Name
+        i18n: translate
+
+      - widget: text
+        name: site_description
+        label: Site Description
+        i18n: translate
+
+      - widget: image
+        name: og_image
+        label: OG Image
+        i18n: duplicate
+
+      - widget: object
+        name: hero_contact
+        label: Hero Contact
+        i18n: translate
+        fields:
+          - name: email
+            label: Email
+            i18n: translate
+          - name: phone
+            label: Phone
+            i18n: translate
+
+      - widget: object
+        name: section_hero
+        label: Section Hero
+        i18n: translate
+        fields:
+          - widget: list
+            name: epithets
+            label: Epithets
+            i18n: translate
+          - widget: string
+            name: epithet_summary
+            label: Epithet Summary
+            i18n: translate
+          - widget: markdown
+            name: greeting
+            label: Greeting
+            i18n: translate
+
+      - widget: object
+        name: section_about
+        label: Section About
+        i18n: translate
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            i18n: translate
+          - widget: text
+            name: text
+            label: About
+            i18n: translate
+
+      - widget: object
+        name: section_contacts
+        label: Section Contacts
+        i18n: translate
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            i18n: translate
+          - widget: text
+            name: proposal
+            label: Proposal
+            i18n: translate

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@import "./common/animate-gradient__rotate.css";
+@import "./common/animated-colors__gradient.css";
+@import "./common/gradients.css";
+@import "./common/header_animation--title.css";
+@import "./common//ribbon-animation__slideshow.css";
+
+@import "./base/scrollbar.css";
+
+@import "./components/site-logo.css";

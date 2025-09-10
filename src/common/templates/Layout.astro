@@ -1,0 +1,57 @@
+---
+import "@/assets/fonts/shadows-into-light-font.css";
+import { getLangFromUrl } from "@/i18n/utils";
+import { cn } from "@/lib/utils/styles";
+import "@/styles/global.css";
+import "@fontsource/source-sans-3/200.css";
+import "@fontsource/source-sans-3/300.css";
+import "@fontsource/source-sans-3/400.css";
+import "@fontsource/source-sans-3/500.css";
+import "@fontsource/source-sans-3/600.css";
+import "@fontsource/source-sans-3/700.css";
+import "@fontsource/source-sans-3/800.css";
+import "@fontsource/source-sans-3/900.css";
+import { ClientRouter } from "astro:transitions";
+import { Toaster } from "svelte-sonner";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html class="dark" {lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <slot name="head" />
+
+    <ClientRouter />
+  </head>
+  <body
+    class={cn(
+      `relative
+      bg-bg
+      z-0
+      min-h-svh
+      tracking-wide
+      text-white`,
+      className
+    )}
+  >
+    <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise">
+    </div>
+    <Header />
+    <slot />
+    <Footer />
+
+    <Toaster theme="dark" client:only="svelte" position="bottom-right" />
+  </body>
+</html>

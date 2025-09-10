@@ -1,0 +1,87 @@
+---
+import classImg from "@/assets/img/stickers/class.png";
+import thinkAboutThisImg from "@/assets/img/stickers/ThkAbtIt.png";
+import configJson from "@/common/config.json";
+import { getLangFromUrl } from "@/i18n/utils";
+import { Image } from "astro:assets";
+
+const lang = getLangFromUrl(Astro.url);
+const config = configJson[lang];
+
+const { section_about } = config;
+
+const textWords = section_about.text.split(" ");
+---
+
+<section id="about-me" class="pt-36 pb-28 md:py-36">
+  <div class="container relative">
+    <div class="absolute inset-0 -z-10">
+      <Image
+        src={thinkAboutThisImg}
+        alt="Think About This"
+        width={210}
+        class={`absolute left-0 xl:left-5 top-0 -translate-y-full md:-translate-y-3/4 xl:translate-y-0 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
+      />
+      <Image
+        src={classImg}
+        alt="Class"
+        width={210}
+        class={`absolute bottom-0 right-0 lg:right-5 translate-y-full lg:translate-y-0 md:translate-y-3/4 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
+      />
+    </div>
+    <h2
+      class="text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4"
+    >
+      {section_about.title}
+    </h2>
+    <p
+      class="font-semibold text-3xl md:text-5xl lg:text-7xl text-center w-full mx-auto max-w-5xl leading-tight lg:leading-tight flex flex-wrap gap-3 justify-center"
+    >
+      {
+        textWords.map((word, index) => (
+          <span
+            data-target="word"
+            style={`--delay: ${index * 100}ms`}
+            class={`word bg-clip-text text-transparent white_gradient opacity-40 transition-opacity duration-500 data-[visible=true]:opacity-100 delay-[var(--delay)]`}
+          >
+            {word}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+</section>
+
+<script>
+  const callback: IntersectionObserverCallback = (entries, observer) => {
+    for (const entry of entries) {
+      const element = entry.target as HTMLSpanElement;
+
+      if (entry.isIntersecting) {
+        element.dataset.visible = "true";
+        observer.unobserve(element);
+      } else {
+        element.dataset.visible = "false";
+      }
+    }
+  };
+
+  const options: IntersectionObserverInit = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  function addObserver() {
+    const words = document.querySelectorAll<HTMLSpanElement>(
+      'section#about-me [data-target="word"]'
+    );
+
+    const observer = new IntersectionObserver(callback, options);
+
+    words.forEach((word) => observer.observe(word));
+  }
+
+  document.addEventListener("DOMContentLoaded", addObserver);
+  document.addEventListener("astro:after-swap", addObserver);
+</script>

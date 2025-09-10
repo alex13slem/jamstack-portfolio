@@ -1,0 +1,96 @@
+---
+import linesPNG from "@/assets/img/Lines.png";
+import Button from "@/common/components/ui/button/Button.svelte";
+import configJson from "@/common/config.json";
+import type { Lang } from "@/i18n/ui";
+import { getLangFromUrl } from "@/i18n/utils";
+import { getSocials } from "@/lib/cruds/social";
+import type { SocialId } from "@/lib/schemas/social";
+import { cn } from "@/lib/utils/styles";
+import { Icon } from "astro-iconify";
+import { Image } from "astro:assets";
+
+const lang = getLangFromUrl(Astro.url);
+
+const section = configJson[lang].section_contacts;
+const socials = await getSocials(lang);
+
+const getButtonText = (id: SocialId, lang: Lang) => {
+  switch (lang) {
+    case "en":
+      switch (id) {
+        case "telegram":
+          return "Contact me on Telegram";
+        case "github":
+          return "Visit my GitHub";
+        case "vk":
+          return "Contact me on VK";
+        case "hh":
+          return "Check my vacancy";
+      }
+    case "ru":
+      switch (id) {
+        case "telegram":
+          return "Связаться в Telegram";
+        case "github":
+          return "Посети мой GitHub";
+        case "vk":
+          return "Связаться в VK";
+        case "hh":
+          return "Посмотри мою вакансию";
+      }
+  }
+};
+---
+
+<section class="pt-36 pb-44 md:py-36">
+  <div
+    class={cn(`
+container max-w-5xl relative md:overflow-visible`)}
+  >
+    <div class="absolute inset-0 -z-10">
+      <Image
+        src={linesPNG}
+        alt="Lines"
+        class="-translate-y-[1px] w-full h-[70vh] lg:h-auto absolute bottom-0 pointer-events-none -z-10"
+      />
+      <div
+        class={cn(`
+  w-full h-[60vh]
+  rounded-full
+  absolute bottom-0 md:top-0 translate-y-1/3  md:-translate-y-2/3
+  gradient-experience__1 blur-3xl md:blur-[150px] opacity-100 z-10
+  `)}
+      >
+      </div>
+    </div>
+    <h2
+      class={cn(`
+text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4`)}
+    >
+      {section.title}
+    </h2>
+    <p
+      class={cn(`
+font-bold text-4xl sm:text-5xl bg-clip-text white_gradient text-transparent leading-snug text-center
+`)}
+    >
+      {section.proposal}
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-14 md:mt-20">
+      {
+        socials.map((social) => (
+          <article class="text-center flex flex-col items-center gap-3">
+            <Icon
+              name={social.iconify_id}
+              class="size-16 text-white text-opacity-90"
+            />
+            <Button variant="fill" href={social.url} external>
+              {getButtonText(social.id, lang)}
+            </Button>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

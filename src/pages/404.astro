@@ -1,0 +1,23 @@
+---
+import SeoFragment from "@/common/components/SeoFragment.astro";
+import Button from "@/common/components/ui/button/Button.svelte";
+import Layout from "@/common/templates/Layout.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout class="overflow-clip">
+  <SeoFragment slot="head" title="JavaScript разработчик" />
+  <main
+    class="flex flex-col justify-center items-center h-svh text-center px-4"
+  >
+    <h1 class="text-7xl sm:text-8xl font-bold">404</h1>
+    <p class="text-lg sm:text-xl mt-4">{t("404.title")}</p>
+    <p class="text-base sm:text-lg text-gray-500">
+      {t("404.description")}
+    </p>
+    <Button href="/" class="mt-8" variant="fill">{t("404.button")}</Button>
+  </main>
+</Layout>

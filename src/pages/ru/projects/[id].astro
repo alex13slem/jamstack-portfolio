@@ -1,0 +1,30 @@
+---
+import SeoFragment from "@/common/components/SeoFragment.astro";
+import Layout from "@/common/templates/Layout.astro";
+import DetailPage from "@/features/product/templates/DetailPage.astro";
+import { getProjectsWithTechnologies } from "@/lib/cruds/project";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjectsWithTechnologies("ru");
+  return projects.map((project) => ({
+    params: {
+      id: project.id,
+    },
+    props: { project },
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+---
+
+<Layout>
+  <SeoFragment
+    slot="head"
+    title={project.name}
+    description={project.description}
+    imageUrls={{ fb: project.image_cover }}
+  />
+
+  <DetailPage {project} />
+</Layout>
