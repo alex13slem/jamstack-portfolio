@@ -33,5 +33,5 @@ const { project } = Astro.props;
   import { suggestRussianVersion } from "@/i18n/utils";
 
   document.addEventListener("DOMContentLoaded", suggestRussianVersion);
-  document.addEventListener("visibilitychange", suggestRussianVersion);
+  document.addEventListener("astro:page-load", suggestRussianVersion);
 </script>
