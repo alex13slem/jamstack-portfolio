@@ -1,51 +1,54 @@
-# Astro Starter Kit: Minimal
+## 🚀 Project: Personal Portfolio Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Portfolio website showcasing my projects and technical expertise. The main goal was to create a **modern, fast-loading, and interactive website** that demonstrates my skills in frontend development, UI/UX, and content management.
 
-<!-- ASTRO:REMOVE:START -->
+## 📋 Role in the Project
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+I fully implemented the project, including frontend, interactivity, and infrastructure setup. My responsibilities included creating the site architecture, integrating dynamic components, animations, and ensuring high performance. I also integrated **Sveltia**, a Git-based CMS, to manage the website content easily.
 
-<!-- ASTRO:REMOVE:END -->
+## 💼 Technologies
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- [**Astro JS (SSG)**](https://astro.build/) — static site generation for fast performance and SEO-friendly pages.
+- [**Svelte**](https://svelte.dev/) — interactive components and dynamic islands.
+- [**React**](https://react.dev/) — used for hybrid dynamic functionality and flexible UI components.
+- [**TailwindCSS**](https://tailwindcss.com/) + [**@tailwindcss/typography**](https://tailwindcss.com/docs/typography-plugin) — responsive, modern, and maintainable styling.
+- [**TypeScript**](https://www.typescriptlang.org/) — safe and predictable code.
+- [**Iconify**](https://iconify.design/) — vector icons integration.
+- [**hover-effect**](https://github.com/robin-dela/hover-effect) — interactive image transitions and effects.
+- [**marked**](https://github.com/markedjs/marked) — Markdown content rendering.
+- [**react-textra**](https://www.npmjs.com/package/react-textra) & [**svelte-sonner**](https://svelte-sonner.vercel.app) — advanced text interactions and notifications.
+- [**@fontsource/source-sans-3**](https://fontsource.org/fonts/source-sans-3) — clean and readable typography.
+- [**Sveltia**](https://github.com/sveltia/sveltia-cms) — Git-based CMS for managing website content directly via repository.
 
-## 🚀 Project Structure
+## ✨ Features
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Interactive Islands:** Dynamic components using Svelte + React for fast, responsive UI.
+- **Animations & Effects:** Smooth hover transitions and notifications for modern UX.
+- **Markdown Content:** Easily manage portfolio content via Markdown files.
+- **Git-based CMS:** Full content administration via **Sveltia**, no backend required.
+- **Type-Safe Setup:** Full TypeScript integration for reliability and maintainability.
+- **Responsive Design:** TailwindCSS ensures mobile-friendly and scalable layouts.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## 🌐 Hosting & Deployment
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The website is **deployed on&#32;[Cloudflare Pages](https://pages.cloudflare.com/)**, using static hosting with serverless functions for forms and interactive integrations. Fully optimized for **fast loading and SEO**.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🔗 Contact & Repository
 
-Any static assets, like images, can be placed in the `public/` directory.
+**Project Repository:** [GitHub](https://github.com/alex13slem/jamstack-portfolio)
 
-## 🧞 Commands
+![Astro JS](https://img.shields.io/badge/Astro%20JS-ff5a03?logo=astro\&logoColor=fff\&style=flat)
 
-All commands are run from the root of the project, from a terminal:
+![Svelte](https://img.shields.io/badge/Svelte-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+![React](https://img.shields.io/badge/React-61DAFB?logo=react\&logoColor=000\&style=flat)
 
-## 👀 Want to learn more?
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06b6d4?logo=tailwind-css\&logoColor=fff\&style=flat)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript\&logoColor=fff\&style=flat)
+
+![Iconify](https://img.shields.io/badge/Iconify-000000?logo=iconify\&logoColor=fff\&style=flat)
+
+![Sveltia](https://img.shields.io/badge/Sveltia-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
+
+![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflare\&logoColor=fff\&style=flat)
