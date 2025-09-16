@@ -1,7 +1,7 @@
 ---
 id: eisvil
 name: Eisvil
-description: 'Этот проект представляет собой полностью обслуживаемый сайт с интерактивными элементами и серверной инфраструктурой, разработанный мной с нуля. В проекте я использовал передовые технологии и подходы для обеспечения высокого уровня производительности и безопасности.'
+description: Этот проект представляет собой полностью обслуживаемый сайт с интерактивными элементами и серверной инфраструктурой, разработанный мной с нуля. В проекте я использовал передовые технологии и подходы для обеспечения высокого уровня производительности и безопасности.
 role: Full-stack разработчик
 site_url: https://eisvil-new.netlify.app/
 github_url: https://github.com/alex13slem/tremendous-transit
@@ -44,14 +44,16 @@ techs:
 
 ---
 
-**Свяжитесь со мной**: [Email](mailto:a.s.scherba@yandex.by)
-
 **Репозиторий проекта**: [GitHub](https://github.com/alex13slem/tremendous-transit)
 
 ![Astro JS](https://img.shields.io/badge/Astro%20JS-ff5a03?logo=astro&logoColor=fff&style=flat)
+
 ![Svelte](https://img.shields.io/badge/Svelte-ff3e00?logo=svelte&logoColor=fff&style=flat)
+
 ![Decap CMS](https://img.shields.io/badge/Decap%20CMS-1e1e1e?logo=netlify&logoColor=fff&style=flat)
+
 ![Netlify](https://img.shields.io/badge/Netlify-00c7b7?logo=netlify&logoColor=fff&style=flat)
+
 ![Zod](https://img.shields.io/badge/Zod-24292e?logo=zod&logoColor=fff&style=flat)
 
-*Этот проект развернут на бесплатном тарифе Netlify*
+_Этот проект развернут на бесплатном тарифе Netlify_

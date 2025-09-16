@@ -1,7 +1,7 @@
 ---
 id: impact
 name: Blagodeistvie Foundation
-description: 'Website for the Blagodeistvie Foundation. Completed within a short timeframe (2.5 weeks) for the foundation’s important conference. The main goal was to create a modern, functional, and fast-loading website that effectively communicates the foundation’s mission and values to a wide audience.'
+description: Website for the charity foundation “Blagodeystvie”. Developed within a short timeframe (2.5 weeks) for the foundation’s important conference. The main goal was to create a modern, functional, and fast-loading website that effectively communicates the foundation’s mission and values to a wide audience.
 role: Full-Stack developer
 site_url: https://blagodeystvie.ru
 github_url: https://github.com/alex13slem
@@ -16,43 +16,23 @@ techs:
   - tailwind-css
   - zod
 ---
-## 🚀 Project: Blagodeistvie Foundation 🚀
+## 🙏 Project: Charity Foundation “Blagodeystvie”
 
-Completed within a short timeframe (2.5 weeks) for the foundation’s important conference. The main goal was to create a modern, functional, and fast-loading website that effectively communicates the foundation’s mission and values to a wide audience.
+The MVP was delivered within a tight timeframe (2.5 weeks) for the foundation’s important conference. The main goal was to create a modern, functional, and fast-loading website that effectively communicates the foundation’s mission and values to a broad audience.
 
-## Technology stack
+## Technology Stack
 
-- Frontend: Astro JS — a lightweight, fast, and modern technology for building static websites.
-- Backend: WordPress — for easy content management without writing PHP.
-- CSS: TailwindCSS — for rapid and flexible styling.
-- Animations: GSAP — a powerful tool for creating smooth animations.
-- Form validation: Felte with Zod-based validator — reliable and flexible form validation.
-- Scroll effects: Locomotive Scroll — provides a smooth and engaging user experience.
-- Swiper: For convenient image carousels.
+- **Frontend:** Astro JS + Svelte — a lightweight, fast, and modern combination for building static sites with dynamic “islands.”
+- **Backend:** WordPress — for convenient content management without writing PHP.
+- **CSS:** TailwindCSS — for rapid and flexible styling.
+- **Form Validation:** Felte with Zod-based validator — reliable and flexible form validation.
+- **Swiper:** For user-friendly image carousels.
+- **Main-screen map** created using SVG + Svelte.
 
-## 🌐 Hosting and deployment
+## 🌐 Hosting and Deployment
 
-The site was deployed on a VPS using Dokploy — a platform that allows easy project and server management, providing full freedom in deployment.
+The site was deployed on a rented Russian VPS using Dokploy — a platform that allows easy management of projects and server resources while providing full deployment freedom. The code is managed through the Russian cloud Git service, GitFlic.
 
-## ⏳ Timeline
+## 🎯 Outcome
 
-2.5 weeks — from concept to final product.
-
-🎯 Outcome:
-The site was successfully presented at the conference, helped raise awareness about the foundation’s work, and attracted attention to their important mission.
-
----
-
-## Technologies and tools
-
-```json
-{
-  "@astrojs/tailwind": "^5.1.0",
-  "gsap": "^3.12.5",
-  "locomotive-scroll": "5.0.0-beta.21",
-  "swiper": "^11.1.10",
-  "svelte": "^4.2.18",
-  "zod": "^3.23.8",
-  "tailwindcss": "^3.4.10"
-}
-```
+The website was successfully showcased at the conference, helping to raise awareness of the foundation’s work and attracting attention to their important mission. The project was later expanded to include several additional initiatives of the foundation.
