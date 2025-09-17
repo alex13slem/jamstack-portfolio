@@ -3,7 +3,7 @@ id: jamstack-portfolio
 name: JAM-stack portfolio
 description: Personal portfolio website of a fullstack developer built with Astro, Svelte, and React. Fast, interactive, and responsive site with modern design, Git-based CMS Sveltia integration, and hosted on Cloudflare Pages. Showcases projects, UI/UX skills, TailwindCSS, TypeScript, Markdown content, and animations.
 role: Full-stack developer
-site_url: https://alex13slem.pages.dev
+site_url: https://alex13slem.vercel.app
 github_url: https://github.com/alex13slem/jamstack-portfolio
 image_cover: /media/project/portfolio-thumb1.png
 image_preview: /media/project/portfolio-preview.webp
