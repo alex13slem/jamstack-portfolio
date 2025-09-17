@@ -72,9 +72,3 @@ techs:
 ![Sveltia](https://img.shields.io/badge/Sveltia-ff3e00?logo=svelte&logoColor=fff&style=flat)
 
 ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflare&logoColor=fff&style=flat)
-
-_Проект демонстрирует современные практики фронтенд-разработки с гибридными фреймворками и полностью интерактивными компонентами._
-
-Если хочешь, я могу ещё сделать **сокращённую версию**, которая идеально подойдёт для LinkedIn или международного портфолио — только самые ключевые навыки и достижения.
-
-Хочешь, чтобы я сделал такую версию?
