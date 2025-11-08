@@ -15,6 +15,10 @@ const t = useTranslations("en");
 <script>
   import { suggestRussianVersion } from "@/i18n/utils";
 
-  document.addEventListener("DOMContentLoaded", suggestRussianVersion);
-  document.addEventListener("astro:page-load", suggestRussianVersion);
+  document.addEventListener("DOMContentLoaded", suggestRussianVersion, {
+    once: true,
+  });
+  document.addEventListener("astro:page-load", suggestRussianVersion, {
+    once: true,
+  });
 </script>
