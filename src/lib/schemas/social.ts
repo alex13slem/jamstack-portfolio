@@ -1,6 +1,12 @@
 import { z } from "astro:content";
 
-export const SocialIdEnum = z.enum(["telegram", "github", "vk", "hh"]);
+export const SocialIdEnum = z.enum([
+  "telegram",
+  "github",
+  "vk",
+  "hh",
+  "linkedin",
+]);
 export type SocialId = z.infer<typeof SocialIdEnum>;
 
 export const SocialCollectionSchema = z.object({

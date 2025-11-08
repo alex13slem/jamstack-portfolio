@@ -16,30 +16,24 @@ const section = configJson[lang].section_contacts;
 const socials = await getSocials(lang);
 
 const getButtonText = (id: SocialId, lang: Lang) => {
-  switch (lang) {
-    case "en":
-      switch (id) {
-        case "telegram":
-          return "Contact me on Telegram";
-        case "github":
-          return "Visit my GitHub";
-        case "vk":
-          return "Contact me on VK";
-        case "hh":
-          return "Check my vacancy";
-      }
-    case "ru":
-      switch (id) {
-        case "telegram":
-          return "Связаться в Telegram";
-        case "github":
-          return "Посети мой GitHub";
-        case "vk":
-          return "Связаться в VK";
-        case "hh":
-          return "Посмотри мою вакансию";
-      }
-  }
+  const labels: Record<Lang, Record<SocialId, string>> = {
+    en: {
+      telegram: "Message me on Telegram",
+      github: "View my GitHub",
+      vk: "Message me on VK",
+      hh: "View my CV on hh.ru",
+      linkedin: "Connect on LinkedIn",
+    },
+    ru: {
+      telegram: "Написать в Telegram",
+      github: "Открыть GitHub",
+      vk: "Написать во ВКонтакте",
+      hh: "Резюме на hh.ru",
+      linkedin: "Профиль в LinkedIn",
+    },
+  } as const;
+
+  return labels[lang][id];
 };
 ---
 
