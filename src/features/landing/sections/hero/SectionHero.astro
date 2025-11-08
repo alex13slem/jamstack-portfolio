@@ -3,17 +3,16 @@ import linesPNG from "@/assets/img/Lines.png";
 import Button from "@/common/components/ui/button/Button.svelte";
 import configJson from "@/common/config.json";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import { getSocial } from "@/lib/cruds/social";
 import { Image } from "astro:assets";
 import { parse } from "marked";
 import HeroEpithets from "./HeroEpithets";
 
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
+const { email } = config.hero_contact;
 
 const { section_hero } = config;
 
-const tg = await getSocial("telegram", lang);
 const t = useTranslations(lang);
 ---
 
@@ -36,7 +35,7 @@ const t = useTranslations(lang);
       set:html={parse(section_hero.greeting)}
     />
     <footer class="text-center flex justify-center">
-      <Button href={tg.url} external variant="fill">
+      <Button href={`mailto:${email}`} variant="fill">
         {t("contact_btn_label")}
       </Button>
     </footer>

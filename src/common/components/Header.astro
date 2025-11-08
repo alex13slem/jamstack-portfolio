@@ -6,12 +6,11 @@ import {
   useTranslatedPath,
   useTranslations,
 } from "@/i18n/utils";
-import { getSocial } from "@/lib/cruds/social";
 
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
+const { email } = config.hero_contact;
 
-const tg = await getSocial("telegram", lang);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 ---
@@ -21,7 +20,7 @@ const translatePath = useTranslatedPath(lang);
     <a class="site-logo" href={translatePath("/")}>
       {config.site_name}
     </a>
-    <Button href={tg.url} external>{t("contact_btn_label")}</Button>
+    <Button href={`mailto:${email}`}>{t("contact_btn_label")}</Button>
   </div>
   <hr
     class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
