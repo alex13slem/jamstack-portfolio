@@ -1,10 +1,11 @@
 <script lang="ts">
   import HoverEffectImage from "@/common/components/hover-effect-image/HoverEffectImage.svelte";
-  import type { ProjectWithTechs } from "@/lib/collections/project";
+  import type { ProjectWithTechs } from "@/lib/cruds/project";
   import { cn } from "@/lib/utils/styles";
   import Icon from "@iconify/svelte";
   import type HoverEffect from "hover-effect";
-  import { type HTMLAttributes } from "svelte/elements";
+  import type { HTMLAttributes } from "svelte/elements";
+  
   let {
     class: className,
     project,
