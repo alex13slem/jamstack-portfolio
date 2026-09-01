@@ -24,11 +24,12 @@ const t = useTranslations(lang);
       class="-translate-y-[1px] w-full absolute top-0 pointer-events-none -z-10"
     />
     <h1
-      class="text-center text-4xl sm:text-5xl md:text-7xl font-bold mt-1 animated-colors__gradient bg-clip-text text-transparent select-none"
+      class="text-center text-4xl sm:text-5xl md:text-7xl font-bold mt-1  select-none"
     >
       <HeroEpithets epithets={section_hero.epithets} client:only="react" />
       <br />
-      {section_hero.epithet_summary}
+      <span class="animated-colors__gradient bg-clip-text text-transparent">{section_hero.epithet_summary}</span>
+      
     </h1>
     <article
       class="text-cyangrey text-lg text-center mx-auto max-w-xl"

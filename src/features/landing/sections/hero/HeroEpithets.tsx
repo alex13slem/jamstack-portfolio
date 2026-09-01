@@ -10,7 +10,7 @@ const HeroEpithets: FC<Props> = ({ epithets }) => {
     <Textra
       data={epithets}
       effect={"downTop"}
-      className=" bg-clip-text text-transparent bg-gradient-to-b from-white to-yellowgrey"
+      className="animated-colors__gradient bg-clip-text text-transparent"
     />
   );
 };
