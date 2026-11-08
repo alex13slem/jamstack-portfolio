@@ -5,5 +5,6 @@ export const TechCollectionSchema = z.object({
   name: z.string(),
   url: z.string().url(),
   iconify_id: z.string(),
+  show_in_ribbon: z.boolean().default(false),
 });
 export type Tech = z.infer<typeof TechCollectionSchema>;

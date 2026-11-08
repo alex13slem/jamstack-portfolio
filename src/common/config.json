@@ -5,12 +5,12 @@
     "og_image": "/media/site-info/portfolio-thumb1.png",
     "section_hero": {
       "epithets": [
-        "Innovative",
-        "Modern",
-        "Full-stack"
+        "Full-stack",
+        "Frontend",
+        "Backend"
       ],
-      "epithet_summary": "TypeScript developer",
-      "greeting": "Hi 👋! I’m Sasha, a full-stack JavaScript developer.\nI help small businesses build fast, stylish, and SEO-optimized websites.\nI live in Belarus and work with clients all around the world."
+      "epithet_summary": "developer",
+      "greeting": "I build content-managed websites, client portals and ERP integrations. My work covers interfaces, server-side logic and deployment."
     },
     "section_experience": {
       "title": "Work experience",
@@ -18,7 +18,8 @@
     },
     "section_about": {
       "title": "About me",
-      "text": "I’m a full-stack developer who follows best development practices and leverages modern technologies to build fast and reliable web applications."
+      "text": "I work on interfaces, server-side logic and integrations. I extend existing systems, connect applications and set up content management.",
+      "interests": "I’m interested in Go and mobile development, and open to collaborative learning projects in these areas."
     },
     "section_contacts": {
       "title": "Contacts",
@@ -35,12 +36,12 @@
     "og_image": "/media/site-info/portfolio-thumb1.png",
     "section_hero": {
       "epithets": [
-        "Инновативный",
-        "Современный",
-        "Full-stack"
+        "Full-stack",
+        "Frontend",
+        "Backend"
       ],
-      "epithet_summary": "TypeScript разработчик",
-      "greeting": "Привет 👋! Я Саша, full-stack разработчик на JavaScript.\nПомогаю малому бизнесу создавать быстрые, стильные и SEO-оптимизированные сайты.\nЖиву в Беларуси, работаю с клиентами по всему миру."
+      "epithet_summary": "разработчик",
+      "greeting": "Разрабатываю сайты с управлением контентом, клиентские порталы и интеграции с ERP. Работаю над интерфейсом, серверной логикой и развёртыванием."
     },
     "section_experience": {
       "title": "Опыт работы",
@@ -48,7 +49,8 @@
     },
     "section_about": {
       "title": "Обо мне",
-      "text": "Я full-stack разработчик, который следует лучшим практикам разработки и внедряет современные технологии для создания быстрых и надёжных веб-приложений."
+      "text": "Работаю над интерфейсами, серверной логикой и интеграциями. Дорабатываю существующие системы, связываю приложения между собой и настраиваю управление контентом.",
+      "interests": "Интересуюсь Go и мобильной разработкой. Открыт к совместным учебным проектам в этих направлениях."
     },
     "section_contacts": {
       "title": "Мои контакты",

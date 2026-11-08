@@ -1,0 +1,17 @@
+---
+import type { Project } from "@/lib/schemas/project";
+import { cn } from "@/lib/utils/styles";
+import { getGalleryImageSize } from "@/lib/utils/gallery";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import ProjectGallery from "../components/ProjectGallery.svelte";
+interface Props { images: Project["gallery"]; class?: string; }
+const { images, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+const items = await Promise.all(images.map(async (image) => ({ ...image, ...await getGalleryImageSize(image.image) })));
+---
+{items.length > 0 && (
+  <section class={cn("project-gallery p-5 sm:p-6 rounded-xl bg-white/5 border border-white/10", className)} aria-labelledby="gallery-title">
+    <h2 id="gallery-title" class="white_gradient bg-clip-text text-transparent text-sm font-extrabold uppercase leading-snug text-balance mb-4">{t("gallery.title")}</h2>
+    <ProjectGallery images={items} labels={{ title: t("gallery.title"), of: t("gallery.of"), open: t("gallery.open"), close: t("gallery.close"), previous: t("gallery.previous"), next: t("gallery.next"), zoomIn: t("gallery.zoomIn"), zoomOut: t("gallery.zoomOut") }} client:visible />
+  </section>
+)}

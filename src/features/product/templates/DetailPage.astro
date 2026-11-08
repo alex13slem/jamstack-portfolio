@@ -1,19 +1,15 @@
 ---
 import type { ProjectWithTechs } from "@/lib/cruds/project";
-import { cn } from "@/lib/utils/styles";
 import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
 import GithubButton from "../components/GithubButton.astro";
 import SectionBody from "../sections/SectionBody.astro";
 import SectionDescription from "../sections/SectionDescription.astro";
 import SectionTechs from "../sections/SectionTechs.astro";
 import SectionThumbnail from "../sections/SectionThumbnail.astro";
+import SectionGallery from "../sections/SectionGallery.astro";
 
-interface Props {
-  project: ProjectWithTechs;
-}
-
+interface Props { project: ProjectWithTechs; }
 const { project } = Astro.props;
-const { body, github_url } = project;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
@@ -28,43 +24,36 @@ const translatePath = useTranslatedPath(lang);
   </a>
 </nav>
 
-<main id="main-content" tabindex="-1" class="container py-5 grid grid-cols-12 grid-flow-dense gap-4">
-  <SectionDescription
-    class={cn`col-span-full row-span-1 row-start-4
-            sm:col-span-8 sm:row-start-2 sm:row-span-4
-            lg:row-span-1 lg:row-start-auto lg:col-span-4 lg:col-start-9`}
-    {project}
-  />
-  <SectionThumbnail
-    class={cn`col-span-full
-    lg:col-span-8 lg:row-span-2`}
-    {project}
-  />
-  {
-    body && (
-      <SectionBody
-        class={cn`col-span-full
-          lg:col-span-8 lg:row-start-3`}
-        {body}
-      />
-    )
-  }
-  {
-    github_url && (
-      <GithubButton
-        class={cn`row-start-2 col-span-4
-                      sm:row-start-auto
-                      xl:col-span-1`}
-        href={github_url}
-        projectName={project.name}
-      />
-    )
-  }
-  <SectionTechs
-    class={cn(`col-span-8 row-span-2 row-start-2
-    sm:col-span-4 sm:row-start-3
-    lg:row-span-2  lg:row-start-auto
-    xl:col-span-3`, !github_url && "col-span-full sm:row-start-2 xl:col-span-4")}
-    techs={project.techs}
-  />
+<main id="main-content" tabindex="-1" class="case-layout container py-5">
+  <SectionDescription class="case-intro" {project} />
+  <div class="case-primary">
+    <SectionThumbnail class="case-cover" {project} />
+    {project.body && <SectionBody class="case-story" body={project.body} />}
+  </div>
+  <div class="case-sidebar">
+    <div class:list={["case-tools", { "case-tools--source": project.github_url }]}>
+      {project.github_url && <GithubButton href={project.github_url} projectName={project.name} />}
+      <SectionTechs techs={project.techs} />
+    </div>
+    <SectionGallery class="case-gallery" images={project.gallery} />
+  </div>
 </main>
+
+<style>
+  .case-layout { display: grid; gap: 1rem; }
+  .case-layout > :global(*) { min-width: 0; }
+  .case-primary, .case-sidebar { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .case-tools { display: grid; gap: 1rem; align-items: start; }
+  .case-tools--source { grid-template-columns: auto minmax(0, 1fr); }
+  @media (min-width: 1024px) {
+    .case-layout {
+      grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+      grid-template-rows: min-content 1fr;
+      grid-template-areas: "primary intro" "primary sidebar";
+      align-items: start;
+    }
+    .case-layout > :global(.case-intro) { grid-area: intro; }
+    .case-primary { grid-area: primary; }
+    .case-sidebar { grid-area: sidebar; }
+  }
+</style>

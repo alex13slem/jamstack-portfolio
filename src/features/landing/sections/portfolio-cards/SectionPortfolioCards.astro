@@ -29,12 +29,12 @@ const t = useTranslations(lang);
     class={"relative max-w-5xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-10"}
   >
     <div
-      class="-z-10 absolute top-6 left-0 select-none pointer-events-none -translate-y-full"
+      class="-z-10 absolute top-8 left-1 select-none pointer-events-none -translate-y-full"
     >
       <Image
         src={heyImage}
         alt=""
-        class={"object-contain ml-3 md:ml-20 mx-auto w-auto"}
+        class={"object-contain ml-3 md:ml-12 w-auto h-28 md:h-36"}
         height={184}
       />
     </div>
@@ -42,7 +42,7 @@ const t = useTranslations(lang);
       projects.map((project) => {
         const href = translatePath(`/projects/${project.id}`);
         return (
-          <ProjectCard {project} {href} client:load>
+          <ProjectCard {project} {href} caseLabel={t("projects.viewCase")} client:load>
             <ProjectCardLinks {project} newTabLabel={t("links.newTab")} />
           </ProjectCard>
         );

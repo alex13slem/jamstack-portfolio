@@ -22,6 +22,17 @@ interface UiSchema {
   "skills.title": string;
   "projects.openSite": string;
   "projects.openSource": string;
+  "projects.viewCase": string;
+  "gallery.title": string;
+  "gallery.open": string;
+  "gallery.close": string;
+  "gallery.previous": string;
+  "gallery.next": string;
+  "gallery.of": string;
+  "gallery.first": string;
+  "gallery.last": string;
+  "gallery.zoomIn": string;
+  "gallery.zoomOut": string;
   "motion.label": string;
   "motion.shortLabel": string;
   "motion.on": string;
@@ -54,6 +65,17 @@ export const ui = {
     "skills.title": "Technologies",
     "projects.openSite": "Visit website",
     "projects.openSource": "View source on GitHub",
+    "projects.viewCase": "View case study",
+    "gallery.title": "Project gallery",
+    "gallery.open": "Open image",
+    "gallery.close": "Close image viewer",
+    "gallery.previous": "Previous image",
+    "gallery.next": "Next image",
+    "gallery.of": "of",
+    "gallery.first": "First image",
+    "gallery.last": "Last image",
+    "gallery.zoomIn": "Zoom in",
+    "gallery.zoomOut": "Zoom out",
     "motion.label": "Page animations",
     "motion.shortLabel": "Animations",
     "motion.on": "on",
@@ -84,6 +106,17 @@ export const ui = {
     "skills.title": "Технологии",
     "projects.openSite": "Открыть сайт",
     "projects.openSource": "Открыть код на GitHub",
+    "projects.viewCase": "Смотреть кейс",
+    "gallery.title": "Галерея проекта",
+    "gallery.open": "Открыть изображение",
+    "gallery.close": "Закрыть просмотр изображения",
+    "gallery.previous": "Предыдущее изображение",
+    "gallery.next": "Следующее изображение",
+    "gallery.of": "из",
+    "gallery.first": "Первое изображение",
+    "gallery.last": "Последнее изображение",
+    "gallery.zoomIn": "Увеличить изображение",
+    "gallery.zoomOut": "Уменьшить изображение",
     "motion.label": "Анимации на странице",
     "motion.shortLabel": "Анимации",
     "motion.on": "вкл.",

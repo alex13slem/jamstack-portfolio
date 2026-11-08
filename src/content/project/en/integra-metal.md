@@ -2,11 +2,19 @@
 id: integra-metal
 order: 10
 name: Integra Metal
+card_summary: "A manufacturing company website: services, enquiries and content management."
 description: Corporate website for a steel construction company, built on 1C-Bitrix. Responsive UI, enquiry forms, a document gallery, and a custom administration module for managing page sections.
 role: Full-stack developer
 site_url: https://integra-metal.ru/
 image_cover: /media/project/integra-metal-cover-4x3.png
 image_preview: /media/project/integra-metal-preview-4x3.jpg
+gallery:
+  - image: /media/project/integra-metal-admin-hero.jpg
+    caption: "Hero section: heading, background video and benefit cards. Local environment."
+    alt: The integra.site hero editor with controls for the heading, video, visibility and benefit cards.
+  - image: /media/project/integra-metal-admin-services.jpg
+    caption: "Services: card visibility, order and content. Local environment."
+    alt: The laser cutting service editor with visibility, sorting, URL, name, subtitle and description controls.
 techs:
   - bitrix
   - php
@@ -45,6 +53,6 @@ The environment uses Docker Compose and Apache. The container build prepared for
 
 ## Explore the website
 
-The public website includes service areas, a service catalogue, enquiry forms, testimonials, certificates, FAQ and contact details. The administration interface requires access and is not part of the public demonstration.
+The public website includes service areas, a service catalogue, enquiry forms, testimonials, certificates, FAQ and contact details. The gallery shows the hero and service editors running in a local environment. Enquiry data is not shown; the administration interface itself requires authentication.
 
 [Visit Integra Metal](https://integra-metal.ru/)

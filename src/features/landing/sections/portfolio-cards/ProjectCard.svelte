@@ -10,11 +10,13 @@
     class: className,
     project,
     href,
+    caseLabel,
     children,
     ...props
   }: HTMLAttributes<HTMLElement> & {
     project: ProjectWithTechs;
     href?: string;
+    caseLabel: string;
     children: Snippet;
   } = $props();
 
@@ -52,7 +54,9 @@
       `)}
   >
     {#if href}
-      <a {href} aria-labelledby={`project-title-${project.id}`} class="project-card__link"></a>
+      <a {href} aria-labelledby={`project-action-${project.id} project-title-${project.id}`} class="project-card__link">
+        <span id={`project-action-${project.id}`} class="sr-only">{caseLabel}:</span>
+      </a>
     {/if}
     <HoverEffectImage
       image1={project.image_cover}
@@ -67,7 +71,7 @@
                `)}
     />
 
-    <div class="flex-1 px-3 py-4 flex flex-col gap-6">
+    <div class="flex-1 px-3 py-4 flex flex-col gap-6 min-w-0">
       <div class="flex-1">
         <p
           class={`
@@ -80,13 +84,15 @@
         </p>
         <h3
           id={`project-title-${project.id}`}
+          translate="no"
           class={`
           white_gradient
-          font-bold bg-clip-text text-transparent text-3xl
+          font-semibold bg-clip-text text-transparent text-2xl text-balance break-words
           `}
         >
           {project.name}
         </h3>
+        <p class="mt-3 text-base leading-relaxed text-cyangrey">{project.card_summary}</p>
       </div>
 
       <hr class="border-white opacity-10" />

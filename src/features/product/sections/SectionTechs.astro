@@ -1,49 +1,27 @@
 ---
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import type { Tech } from "@/lib/schemas/tech";
-import { cn } from "@/lib/utils/styles";
 import Icon from "astro-iconify";
-
-interface Props {
-  techs: Tech[];
-  class?: string;
-}
-
-const { techs, class: className } = Astro.props;
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+interface Props { techs: Tech[]; }
+const { techs } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
-<section
-  class={cn(
-    `p-4 rounded-xl
-  bg-white/5 backdrop-blur-sm
-    border border-white/10 h-fit`,
-    className
-  )}
->
-  <h2
-    class={cn(`white_gradient
-              font-bold bg-clip-text text-transparent text-lg text-right leading-none`)}
-  >
-    {t("projects.techs.title")}
-  </h2>
-  <div
-    class="mt-3 flex flex-row-reverse flex-wrap gap-3 prose prose-slate dark:prose-invert"
-  >
-    {
-      techs.map((t) => (
-        <a
-          href={t.url}
-          class={cn(`text-2xl flex justify-center items-center
-                  text-white/60 hover:text-white/90 transition-colors`)}
-          title={t.name}
-          aria-label={t.name}
-        >
-          <Icon name={t.iconify_id} className="size-5" aria-hidden="true" />
-        </a>
-      ))
-    }
-  </div>
-</section>
+{techs.length > 0 && <section class="p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
+  <h2 class="white_gradient font-extrabold bg-clip-text text-transparent text-sm uppercase leading-snug text-balance">{t("projects.techs.title")}</h2>
+  <ul role="list" class="case-techs">
+    {techs.map((tech) => <li>
+      <a href={tech.url} class="case-tech" translate="no">
+        <Icon name={tech.iconify_id} width="20" height="20" aria-hidden="true" />
+        <span>{tech.name}</span>
+      </a>
+    </li>)}
+  </ul>
+</section>}
+
+<style>
+  .case-techs { display: flex; flex-wrap: wrap; gap: 0.25rem 0.875rem; margin-top: 0.75rem; }
+  .case-tech { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 32px; max-width: 100%; color: #c8c8c3; font-size: 0.875rem; transition: color 0.2s; }
+  .case-tech:hover { color: #fff; }
+  .case-tech :global(svg) { flex-shrink: 0; }
+</style>

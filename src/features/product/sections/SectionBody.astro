@@ -1,26 +1,21 @@
 ---
 import { cn } from "@/lib/utils/styles";
 import { parse } from "marked";
-
-interface Props {
-  body: string;
-  class?: string;
-}
-
+interface Props { body: string; class?: string; }
 const { body, class: className } = Astro.props;
 ---
 
-<section
-  class={cn(
-    `p-4 rounded-xl
-    bg-white/5 backdrop-blur-sm
-    border border-white/10`,
-    className
-  )}
->
-  <div
-    class="prose prose-sm md:prose-base prose-slate dark:prose-invert max-w-none"
-  >
+<section class={cn("p-5 sm:p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10", className)}>
+  <div class="case-prose prose prose-base prose-slate dark:prose-invert max-w-[75ch] text-left">
     <Fragment set:html={parse(body)} />
   </div>
 </section>
+
+<style>
+  .case-prose { font-size: 1rem; line-height: 1.65; overflow-wrap: anywhere; text-wrap: pretty; }
+  .case-prose :global(h2) { margin-block: 2rem 1rem; font-size: .875rem; line-height: 1.4; font-weight: 800; text-transform: uppercase; text-wrap: balance; }
+  .case-prose :global(h2:first-child) { margin-top: 0; }
+  .case-prose :global(h3) { font-size: 1rem; line-height: 1.5; font-weight: 600; text-wrap: balance; }
+  .case-prose :global(a) { text-decoration-thickness: 1px; text-underline-offset: .2em; }
+  .case-prose :global(img) { max-width: 100%; height: auto; }
+</style>

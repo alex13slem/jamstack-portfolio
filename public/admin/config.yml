@@ -44,6 +44,13 @@ collections:
         label: Iconify ID
         i18n: duplicate
 
+      - name: show_in_ribbon
+        label: Also Show in Technology Ribbon
+        widget: boolean
+        default: false
+        i18n: duplicate
+        hint: Technologies used in projects or visible work experience are included automatically.
+
   - name: project
     label: Projects
     label_singular: Project
@@ -76,6 +83,12 @@ collections:
         name: description
         label: Description
         i18n: translate
+
+      - name: card_summary
+        label: Short Card Description
+        widget: string
+        i18n: translate
+        pattern: ['^.{1,160}$', 'Use between 1 and 160 characters.']
 
       - widget: markdown
         name: body
@@ -113,6 +126,28 @@ collections:
         multiple: true
         label: Technologies
         required: false
+
+      - name: gallery
+        label: Project Gallery
+        widget: list
+        required: false
+        i18n: translate
+        summary: "{{fields.caption}}"
+        fields:
+          - name: image
+            label: Image
+            widget: image
+            i18n: duplicate
+          - name: caption
+            label: Caption
+            widget: text
+            required: false
+            i18n: translate
+          - name: alt
+            label: Image Description
+            widget: string
+            i18n: translate
+            hint: Describe what the screenshot shows for screen reader users.
 
   - name: experience
     label: Work Experience
@@ -288,6 +323,11 @@ singletons:
           - widget: text
             name: text
             label: About
+            i18n: translate
+          - widget: text
+            name: interests
+            label: Learning Interests
+            required: false
             i18n: translate
 
       - widget: object

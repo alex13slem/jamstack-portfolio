@@ -25,15 +25,25 @@ const textWords = section_about.text.split(/\s+/);
       <scroll-highlight class="about-highlight">
         {textWords.map((word, index) => (
           <Fragment>
-            <span class="about-word bg-clip-text text-transparent white_gradient" style={`--word-delay: ${index * 100}ms`}>{word}</span>{" "}
+            <span class="about-word bg-clip-text text-transparent white_gradient" style={`--word-delay: ${index * 35}ms`}>{word}</span>{" "}
           </Fragment>
         ))}
       </scroll-highlight>
     </p>
+    {section_about.interests && <p class="about-interests">{section_about.interests}</p>}
   </div>
 </section>
 
 <style>
+  .about-interests {
+    max-width: 48rem;
+    margin: 2rem auto 0;
+    color: #c8c8c3;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    text-align: center;
+    text-wrap: pretty;
+  }
   .about-word {
     display: inline-block;
     opacity: 1;
@@ -41,7 +51,7 @@ const textWords = section_about.text.split(/\s+/);
 
   .about-highlight[data-animated="true"] .about-word {
     opacity: 0.4;
-    transition: opacity 500ms ease;
+    transition: opacity 200ms ease;
     transition-delay: var(--word-delay, 0ms);
   }
 

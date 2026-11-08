@@ -1,10 +1,10 @@
 ---
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import { getTechs } from "@/lib/cruds/tech";
+import { getRibbonTechs } from "@/lib/cruds/ribbon";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const techs = await getTechs(lang);
+const techs = await getRibbonTechs(lang);
 ---
 
 {
