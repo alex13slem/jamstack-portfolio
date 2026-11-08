@@ -12,6 +12,10 @@
       "epithet_summary": "TypeScript developer",
       "greeting": "Hi 👋! I’m Sasha, a full-stack JavaScript developer.\nI help small businesses build fast, stylish, and SEO-optimized websites.\nI live in Belarus and work with clients all around the world."
     },
+    "section_experience": {
+      "title": "Work experience",
+      "profile_link_label": "Full profile on LinkedIn"
+    },
     "section_about": {
       "title": "About me",
       "text": "I’m a full-stack developer who follows best development practices and leverages modern technologies to build fast and reliable web applications."
@@ -37,6 +41,10 @@
       ],
       "epithet_summary": "TypeScript разработчик",
       "greeting": "Привет 👋! Я Саша, full-stack разработчик на JavaScript.\nПомогаю малому бизнесу создавать быстрые, стильные и SEO-оптимизированные сайты.\nЖиву в Беларуси, работаю с клиентами по всему миру."
+    },
+    "section_experience": {
+      "title": "Опыт работы",
+      "profile_link_label": "Полный профиль в LinkedIn"
     },
     "section_about": {
       "title": "Обо мне",

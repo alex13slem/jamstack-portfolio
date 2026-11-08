@@ -114,6 +114,87 @@ collections:
         label: Technologies
         required: false
 
+  - name: experience
+    label: Work Experience
+    label_singular: Role
+    folder: src/content/experience
+    create: true
+    i18n: true
+    slug: "{{id}}"
+    identifier_field: company
+    summary: "{{company}} — {{role}}"
+    sortable_fields: [order, company, start_date]
+    fields:
+      - name: id
+        label: ID
+        widget: string
+        i18n: duplicate
+
+      - name: company
+        label: Company
+        widget: string
+        i18n: duplicate
+
+      - name: role
+        label: Role
+        widget: string
+        i18n: translate
+
+      - name: description
+        label: Responsibilities
+        widget: text
+        i18n: translate
+
+      - name: start_date
+        label: Start Month
+        widget: datetime
+        type: date
+        format: YYYY-MM
+        i18n: duplicate
+        hint: Only the month and year are stored and displayed.
+
+      - name: end_date
+        label: End Month
+        widget: datetime
+        type: date
+        format: YYYY-MM
+        required: false
+        i18n: duplicate
+        hint: Leave empty for a current role. Only the month and year are stored.
+
+      - name: work_mode
+        label: Work Arrangement
+        widget: string
+        required: false
+        i18n: translate
+        hint: For example Remote or Hybrid.
+
+      - name: order
+        label: Display Order
+        widget: number
+        value_type: int
+        default: 100
+        min: 0
+        step: 1
+        i18n: duplicate
+
+      - name: visible
+        label: Show on Website
+        widget: boolean
+        default: true
+        i18n: duplicate
+
+      - name: techs
+        label: Technologies
+        widget: relation
+        collection: tech
+        value_field: id
+        display_fields: [name]
+        search_fields: [name, id]
+        multiple: true
+        required: false
+        i18n: duplicate
+
   - name: social
     label: Social
     label_singular: Social
@@ -207,6 +288,20 @@ singletons:
           - widget: text
             name: text
             label: About
+            i18n: translate
+
+      - widget: object
+        name: section_experience
+        label: Section Work Experience
+        i18n: translate
+        fields:
+          - widget: string
+            name: title
+            label: Title
+            i18n: translate
+          - widget: string
+            name: profile_link_label
+            label: LinkedIn Link Label
             i18n: translate
 
       - widget: object

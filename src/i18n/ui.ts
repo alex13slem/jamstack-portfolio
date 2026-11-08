@@ -35,6 +35,8 @@ interface UiSchema {
   "contacts.copied": string;
   "contacts.copyError": string;
   "contacts.socials": string;
+  "experience.present": string;
+  "experience.technologies": string;
 }
 
 export const ui = {
@@ -65,6 +67,8 @@ export const ui = {
     "contacts.copied": "Email copied",
     "contacts.copyError": "Could not copy. Select the address and copy it manually.",
     "contacts.socials": "Other ways to connect",
+    "experience.present": "Present",
+    "experience.technologies": "Technologies used in this role",
   } as const satisfies UiSchema,
   ru: {
     contact_btn_label: "Связаться",
@@ -93,6 +97,8 @@ export const ui = {
     "contacts.copied": "Email скопирован",
     "contacts.copyError": "Не удалось скопировать. Выделите адрес и скопируйте его вручную.",
     "contacts.socials": "Другие способы связи",
+    "experience.present": "настоящее время",
+    "experience.technologies": "Технологии в этой роли",
   } as const satisfies UiSchema,
 } as const;
 
