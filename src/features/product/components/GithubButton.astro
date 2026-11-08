@@ -1,25 +1,31 @@
 ---
 import { cn } from "@/lib/utils/styles";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import Icon from "astro-iconify";
 
 interface Props {
   href: string;
+  projectName: string;
   class?: string;
 }
 
-const { href, class: className } = Astro.props;
+const { href, projectName, class: className } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+const label = `${t("projects.openSource")}: ${projectName} (${t("links.newTab")})`;
 ---
 
-<button
+<a
+  {href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  title={label}
   class={cn(
-    `rounded-xl relative p-4
-    bg-white/5 backdrop-blur-sm
-    border border-white/10
-    flex justify-center items-center
-    text-white/60 hover:text-white/90 transition-colors`,
+    `rounded-xl p-4 bg-white/5 backdrop-blur-sm border border-white/10
+    flex self-start justify-center items-center text-white/60 hover:text-white
+    transition-colors`,
     className
   )}
 >
-  <a {href} target="_blank" class="absolute inset-0"></a>
-  <Icon name="octicon:logo-github-16" class="h-5" />
-</button>
+  <Icon name="octicon:logo-github-16" class="h-5" aria-hidden="true" />
+</a>

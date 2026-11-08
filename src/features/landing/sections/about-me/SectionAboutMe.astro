@@ -6,82 +6,96 @@ import { getLangFromUrl } from "@/i18n/utils";
 import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
-const config = configJson[lang];
-
-const { section_about } = config;
-
-const textWords = section_about.text.split(" ");
+const { section_about } = configJson[lang];
+const textWords = section_about.text.split(/\s+/);
 ---
 
-<section id="about-me" class="pt-36 pb-28 md:py-36">
+<section id="about-me" aria-labelledby="about-title" class="pt-36 pb-28 md:py-36">
   <div class="container relative">
-    <div class="absolute inset-0 -z-10">
-      <Image
-        src={thinkAboutThisImg}
-        alt="Think About This"
-        width={210}
-        class={`absolute left-0 xl:left-5 top-0 -translate-y-full md:-translate-y-3/4 xl:translate-y-0 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
-      />
-      <Image
-        src={classImg}
-        alt="Class"
-        width={210}
-        class={`absolute bottom-0 right-0 lg:right-5 translate-y-full lg:translate-y-0 md:translate-y-3/4 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none`}
-      />
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <Image src={thinkAboutThisImg} alt="" width={210}
+        class="absolute left-0 xl:left-5 top-0 -translate-y-full md:-translate-y-3/4 xl:translate-y-0 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none" />
+      <Image src={classImg} alt="" width={210}
+        class="absolute bottom-0 right-0 lg:right-5 translate-y-full lg:translate-y-0 md:translate-y-3/4 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none" />
     </div>
-    <h2
-      class="text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4"
-    >
+    <h2 id="about-title" class="text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4">
       {section_about.title}
     </h2>
-    <p
-      class="font-semibold text-3xl md:text-5xl lg:text-7xl text-center w-full mx-auto max-w-5xl leading-tight lg:leading-tight flex flex-wrap gap-3 justify-center"
-    >
-      {
-        textWords.map((word, index) => (
-          <span
-            data-target="word"
-            style={`--delay: ${index * 100}ms`}
-            class={`word bg-clip-text text-transparent white_gradient opacity-40 transition-opacity duration-500 data-[visible=true]:opacity-100 delay-[var(--delay)]`}
-          >
-            {word}
-          </span>
-        ))
-      }
+    <p class="font-semibold text-3xl md:text-5xl lg:text-7xl text-center w-full mx-auto max-w-5xl leading-tight">
+      <scroll-highlight class="about-highlight">
+        {textWords.map((word, index) => (
+          <Fragment>
+            <span class="about-word bg-clip-text text-transparent white_gradient" style={`--word-delay: ${index * 100}ms`}>{word}</span>{" "}
+          </Fragment>
+        ))}
+      </scroll-highlight>
     </p>
   </div>
 </section>
 
-<script>
-  const callback: IntersectionObserverCallback = (entries, observer) => {
-    for (const entry of entries) {
-      const element = entry.target as HTMLSpanElement;
-
-      if (entry.isIntersecting) {
-        element.dataset.visible = "true";
-        observer.unobserve(element);
-      } else {
-        element.dataset.visible = "false";
-      }
-    }
-  };
-
-  const options: IntersectionObserverInit = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.5,
-  };
-
-  function addObserver() {
-    const words = document.querySelectorAll<HTMLSpanElement>(
-      'section#about-me [data-target="word"]'
-    );
-
-    const observer = new IntersectionObserver(callback, options);
-
-    words.forEach((word) => observer.observe(word));
+<style>
+  .about-word {
+    display: inline-block;
+    opacity: 1;
   }
 
-  document.addEventListener("DOMContentLoaded", addObserver);
-  document.addEventListener("astro:after-swap", addObserver);
+  .about-highlight[data-animated="true"] .about-word {
+    opacity: 0.4;
+    transition: opacity 500ms ease;
+    transition-delay: var(--word-delay, 0ms);
+  }
+
+  .about-highlight[data-animated="true"] .about-word[data-visible="true"] {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-highlight .about-word {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  class ScrollHighlight extends HTMLElement {
+    private observer?: IntersectionObserver;
+    private motion?: MediaQueryList;
+
+    private setup = () => {
+      this.observer?.disconnect();
+      if (this.motion?.matches || document.documentElement.dataset.motion !== "running"
+        || !("IntersectionObserver" in window)) {
+        this.removeAttribute("data-animated");
+        return;
+      }
+
+      this.observer = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          (entry.target as HTMLElement).dataset.visible = "true";
+          observer.unobserve(entry.target);
+        }
+      }, { threshold: 0.5 });
+
+      this.querySelectorAll<HTMLElement>(".about-word:not([data-visible='true'])")
+        .forEach((word) => this.observer?.observe(word));
+      this.dataset.animated = "true";
+    };
+
+    connectedCallback() {
+      this.motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      this.motion.addEventListener("change", this.setup);
+      document.addEventListener("portfolio:motion-change", this.setup);
+      this.setup();
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+      this.motion?.removeEventListener("change", this.setup);
+      document.removeEventListener("portfolio:motion-change", this.setup);
+    }
+  }
+
+  if (!customElements.get("scroll-highlight")) customElements.define("scroll-highlight", ScrollHighlight);
 </script>

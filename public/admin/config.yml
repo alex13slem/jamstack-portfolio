@@ -59,6 +59,15 @@ collections:
         label: ID
         i18n: duplicate
 
+      - name: order
+        label: Display Order
+        widget: number
+        value_type: int
+        default: 100
+        min: 0
+        step: 1
+        i18n: duplicate
+
       - name: name
         label: Name
         i18n: translate
@@ -85,6 +94,7 @@ collections:
       - name: github_url
         label: GitHub Link
         i18n: duplicate
+        required: false
 
       - widget: image
         name: image_cover

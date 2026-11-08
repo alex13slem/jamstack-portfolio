@@ -7,22 +7,38 @@ import {
   useTranslations,
 } from "@/i18n/utils";
 
+interface Props { languageFallback?: string; }
+const { languageFallback } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
 const { email } = config.hero_contact;
 
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
+const otherLang = lang === "ru" ? "en" : "ru";
 ---
 
-<header class="sticky top-0 z-30 backdrop-blur-xs">
+<header class="site-header sticky top-0 z-30">
   <div class="container flex justify-between items-center py-4">
     <a class="site-logo" href={translatePath("/")}>
       {config.site_name}
     </a>
-    <Button href={`mailto:${email}`}>{t("contact_btn_label")}</Button>
+    <div class="site-header__actions">
+      <Button variant="subtle" class="language-link" data-language={otherLang}
+        data-language-path={languageFallback}
+        href={translatePath(languageFallback ?? Astro.url.pathname + Astro.url.search, otherLang)}
+        hreflang={otherLang} lang={otherLang}
+        aria-label={`${otherLang.toUpperCase()}: ${t("nav.switchLanguage")}`} title={t("nav.switchLanguage")}>
+        {otherLang.toUpperCase()}
+      </Button>
+      <Button href={`mailto:${email}`} class="[&>span]:px-5 sm:[&>span]:px-7">{t("contact_btn_label")}</Button>
+    </div>
   </div>
   <hr
     class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
   />
 </header>
+
+<script>
+  import "@/common/scripts/language-links";
+</script>

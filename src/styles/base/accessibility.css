@@ -1,0 +1,102 @@
+:root {
+  color-scheme: dark;
+  --focus-ring: #b9bcfe;
+  --focus-halo: rgb(185 188 254 / 20%);
+  --selection-background: rgb(185 188 254 / 32%);
+  --header-clearance: 7rem;
+}
+
+::selection {
+  color: #fff;
+  background-color: var(--selection-background);
+  text-shadow: none;
+}
+
+/* Keep selected button labels readable on their light gradient fill. */
+.site-button[data-variant="fill"]::selection,
+.site-button[data-variant="fill"] *::selection {
+  color: #090f16;
+}
+
+:where(main, section, h1, h2, h3)[id] {
+  scroll-margin-block-start: var(--header-clearance);
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]) {
+  scroll-margin-block: var(--header-clearance) 1rem;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+/* One contour in the button's own border, rather than a second outer pill. */
+.site-button[data-variant="bordered"]:focus-visible {
+  outline-offset: -2px;
+  background-color: var(--focus-ring);
+}
+
+.site-button[data-variant="bordered"]:focus-visible > i {
+  opacity: 0;
+}
+
+/* Separate the focus contour from the light gradient with a dark gap. */
+.site-button[data-variant="fill"]:focus-visible {
+  outline: 2px solid #dfe5ec;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #090f16;
+}
+
+:where(a, button) { touch-action: manipulation; }
+
+.skip-link {
+  position: fixed;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 1rem;
+  z-index: 100;
+  max-inline-size: calc(100% - 2rem);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: #090f16;
+  background: #dfe5ec;
+  font-weight: 600;
+  transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus-visible { transform: translateY(0); }
+
+.project-card:focus-within,
+.project-thumbnail:focus-within {
+  box-shadow: 0 0 18px var(--focus-halo);
+}
+
+/* The focused link supplies the contour; decoration must not add more rings. */
+.project-card:focus-within > i,
+.project-thumbnail:focus-within > i {
+  opacity: 0;
+}
+
+.project-card a:focus-visible {
+  opacity: 1;
+}
+
+.project-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.project-card__link:focus-visible,
+.project-thumbnail__link:focus-visible { outline-offset: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .hover-effect-canvas { display: none; }
+  .site-button { translate: none !important; transform: none !important; }
+}

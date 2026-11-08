@@ -1,6 +1,5 @@
 .animated-colors__gradient,
 .colors__gradient {
-  will-change: transform;
   background-image: radial-gradient(
       66.11% 66.11% at 50% 33.89%,
       hsla(0, 0%, 100%, 0.4) 0,
@@ -17,19 +16,17 @@
 
 .animated-colors__gradient {
   background-size: 200% 200%;
-  animation: animate-colors__gradient 10s ease infinite;
+  background-position: 50% 50%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-motion] .animated-colors__gradient {
+    animation: animate-colors__gradient 10s ease infinite;
+    animation-play-state: var(--auto-motion-play-state, paused);
+  }
 }
 
 @keyframes animate-colors__gradient {
-  0% {
-    background-position: 0 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  to {
-    background-position: 0 50%;
-  }
+  0%, 100% { background-position: 0 50%; }
+  50% { background-position: 100% 50%; }
 }

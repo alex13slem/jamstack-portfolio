@@ -20,13 +20,13 @@ const t = useTranslations(lang);
   <div class="container relative z-1 max-w-4xl grid grid-cols-1 gap-8">
     <Image
       src={linesPNG}
-      alt="Lines"
+      alt=""
       class="-translate-y-[1px] w-full absolute top-0 pointer-events-none -z-10"
     />
     <h1
       class="text-center text-4xl sm:text-5xl md:text-7xl font-bold mt-1  select-none"
     >
-      <HeroEpithets epithets={section_hero.epithets} client:only="react" />
+      <HeroEpithets epithets={section_hero.epithets} client:load />
       <br />
       <span class="animated-colors__gradient bg-clip-text text-transparent">{section_hero.epithet_summary}</span>
       

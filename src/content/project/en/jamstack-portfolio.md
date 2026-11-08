@@ -1,7 +1,8 @@
 ---
 id: jamstack-portfolio
+order: 20
 name: JAM-stack portfolio
-description: Personal portfolio website of a fullstack developer built with Astro, Svelte, and React. Fast, interactive, and responsive site with modern design, Git-based CMS Sveltia integration, and hosted on Cloudflare Pages. Showcases projects, UI/UX skills, TailwindCSS, TypeScript, Markdown content, and animations.
+description: A personal website with projects, work experience and contact details in English and Russian. Static pages built with Astro, interactive components in Svelte and React, and content editing through Sveltia CMS.
 role: Full-stack developer
 site_url: https://alex13slem.vercel.app
 github_url: https://github.com/alex13slem/jamstack-portfolio
@@ -14,61 +15,30 @@ techs:
   - tailwind-css
   - typescript
   - zod
-  - cloudflare
   - iconify
   - sveltia
 ---
-## 🚀 Project: Personal Portfolio Website
 
-Portfolio website showcasing my projects and technical expertise. The main goal was to create a **modern, fast-loading, and interactive website** that demonstrates my skills in frontend development, UI/UX, and content management.
+## The task
 
-## 📋 Role in the Project
+Bring projects, work experience and contact details together on one website. Visitors should be able to understand the work I do, explore individual case studies and get in touch. The content needs to be editable in English and Russian through an administration interface.
 
-I fully implemented the project, including frontend, interactivity, and infrastructure setup. My responsibilities included creating the site architecture, integrating dynamic components, animations, and ensuring high performance. I also integrated **Sveltia**, a Git-based CMS, to manage the website content easily.
+## Work completed
 
-## 💼 Technologies
+- Built the home page, project pages and a language switch that preserves the current section.
+- Set up collections for projects, work experience, technologies and social links. Linked entries to technologies and added controls for the order and visibility of work experience.
+- Integrated Sveltia CMS for editing content and site settings.
+- Implemented animations for the headline, technology ribbon and project cards, with a shared motion control.
+- Added keyboard navigation, visible focus, a skip link and email copying.
 
-- [**Astro JS (SSG)**](https://astro.build/) — static site generation for fast performance and SEO-friendly pages.
-- [**Svelte**](https://svelte.dev/) — interactive components and dynamic islands.
-- [**React**](https://react.dev/) — used for hybrid dynamic functionality and flexible UI components.
-- [**TailwindCSS**](https://tailwindcss.com/) + [**@tailwindcss/typography**](https://tailwindcss.com/docs/typography-plugin) — responsive, modern, and maintainable styling.
-- [**TypeScript**](https://www.typescriptlang.org/) — safe and predictable code.
-- [**Iconify**](https://iconify.design/) — vector icons integration.
-- [**hover-effect**](https://github.com/robin-dela/hover-effect) — interactive image transitions and effects.
-- [**marked**](https://github.com/markedjs/marked) — Markdown content rendering.
-- [**react-textra**](https://www.npmjs.com/package/react-textra) & [**svelte-sonner**](https://svelte-sonner.vercel.app) — advanced text interactions and notifications.
-- [**@fontsource/source-sans-3**](https://fontsource.org/fonts/source-sans-3) — clean and readable typography.
-- [**Sveltia**](https://github.com/sveltia/sveltia-cms) — Git-based CMS for managing website content directly via repository.
+## Technical decisions
 
-## ✨ Features
+Astro generates static pages from content collections. Zod schemas validate the data structure during the build. Each entry has separate English and Russian versions; project descriptions use Markdown.
 
-- **Interactive Islands:** Dynamic components using Svelte + React for fast, responsive UI.
-- **Animations & Effects:** Smooth hover transitions and notifications for modern UX.
-- **Markdown Content:** Easily manage portfolio content via Markdown files.
-- **Git-based CMS:** Full content administration via **Sveltia**, no backend required.
-- **Type-Safe Setup:** Full TypeScript integration for reliability and maintainability.
-- **Responsive Design:** TailwindCSS ensures mobile-friendly and scalable layouts.
+Svelte powers the project cards, while React handles the rotating words in the opening headline. Image transitions on the cards use WebGL. A standard HTML image remains available without JavaScript and when WebGL is unavailable.
 
-## 🌐 Hosting & Deployment
+Tailwind CSS provides the styles. Reduced-motion preferences and a shared control govern animations. Visitors can get in touch through email links or copy the address.
 
-The website is **deployed on&#32;[Cloudflare Pages](https://pages.cloudflare.com/)**, using static hosting with serverless functions for forms and interactive integrations. Fully optimized for **fast loading and SEO**.
+## Explore the project
 
-## 🔗 Contact & Repository
-
-**Project Repository:** [GitHub](https://github.com/alex13slem/jamstack-portfolio)
-
-![Astro JS](https://img.shields.io/badge/Astro%20JS-ff5a03?logo=astro\&logoColor=fff\&style=flat)
-
-![Svelte](https://img.shields.io/badge/Svelte-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
-
-![React](https://img.shields.io/badge/React-61DAFB?logo=react\&logoColor=000\&style=flat)
-
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06b6d4?logo=tailwind-css\&logoColor=fff\&style=flat)
-
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript\&logoColor=fff\&style=flat)
-
-![Iconify](https://img.shields.io/badge/Iconify-000000?logo=iconify\&logoColor=fff\&style=flat)
-
-![Sveltia](https://img.shields.io/badge/Sveltia-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
-
-![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflare\&logoColor=fff\&style=flat)
+The website includes two languages, project case studies and work experience with associated technologies. The administration interface supports editing text and relationships between entries. The source code is available through the GitHub link alongside the project description.

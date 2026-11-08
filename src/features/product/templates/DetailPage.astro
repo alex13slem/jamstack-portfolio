@@ -1,6 +1,7 @@
 ---
 import type { ProjectWithTechs } from "@/lib/cruds/project";
 import { cn } from "@/lib/utils/styles";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
 import GithubButton from "../components/GithubButton.astro";
 import SectionBody from "../sections/SectionBody.astro";
 import SectionDescription from "../sections/SectionDescription.astro";
@@ -13,9 +14,27 @@ interface Props {
 
 const { project } = Astro.props;
 const { body, github_url } = project;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
-<main class="container py-5 grid grid-cols-12 grid-flow-dense gap-4">
+<nav class="container pt-3" aria-label={t("nav.projects")}>
+  <a class="back-to-projects" data-all-projects href={translatePath("/#projects")}>
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="m14 6-6 6 6 6M8 12h13" />
+    </svg>
+    {t("nav.allProjects")}
+  </a>
+</nav>
+
+<main id="main-content" tabindex="-1" class="container py-5 grid grid-cols-12 grid-flow-dense gap-4">
+  <SectionDescription
+    class={cn`col-span-full row-span-1 row-start-4
+            sm:col-span-8 sm:row-start-2 sm:row-span-4
+            lg:row-span-1 lg:row-start-auto lg:col-span-4 lg:col-start-9`}
+    {project}
+  />
   <SectionThumbnail
     class={cn`col-span-full
     lg:col-span-8 lg:row-span-2`}
@@ -30,23 +49,22 @@ const { body, github_url } = project;
       />
     )
   }
-  <SectionDescription
-    class={cn`col-span-full row-span-1 row-start-4
-            sm:col-span-8 sm:row-start-2 sm:row-span-4
-            lg:row-span-1 lg:row-start-auto lg:col-span-4`}
-    {project}
-  />
-  <GithubButton
-    class={cn`row-start-2 col-span-4
-                  sm:row-start-auto
-                  xl:col-span-1`}
-    href={github_url}
-  />
+  {
+    github_url && (
+      <GithubButton
+        class={cn`row-start-2 col-span-4
+                      sm:row-start-auto
+                      xl:col-span-1`}
+        href={github_url}
+        projectName={project.name}
+      />
+    )
+  }
   <SectionTechs
-    class={cn`col-span-8 row-span-2 row-start-2
+    class={cn(`col-span-8 row-span-2 row-start-2
     sm:col-span-4 sm:row-start-3
     lg:row-span-2  lg:row-start-auto
-    xl:col-span-3 `}
+    xl:col-span-3`, !github_url && "col-span-full sm:row-start-2 xl:col-span-4")}
     techs={project.techs}
   />
 </main>

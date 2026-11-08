@@ -1,17 +1,20 @@
 ---
 import heyImage from "@/assets/img/stickers/hey.png";
-import { getLangFromUrl, useTranslatedPath } from "@/i18n/utils";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
 import { getProjectsWithTechnologies } from "@/lib/cruds/project";
 import { Image } from "astro:assets";
 import ProjectCard from "./ProjectCard.svelte";
+import ProjectCardLinks from "./ProjectCardLinks.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const projects = await getProjectsWithTechnologies(lang);
 
 const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 ---
 
-<section class="relative">
+<section id="projects" aria-labelledby="projects-title" class="relative">
+  <h2 id="projects-title" class="sr-only">{t("projects.title")}</h2>
   <div
     class="-z-10 min-h-[calc(100vh-50vh)] min-w-[calc(100vw-50vw)] max-w-[780px] max-h-[780px] w-full h-full md:min-h-[780px] md:min-w-[780px] rounded-full absolute top-0 gradient-experience__1 blur-[150px] -translate-y-1/4 -translate-x-1/2 left-1/2"
   >
@@ -30,7 +33,7 @@ const translatePath = useTranslatedPath(lang);
     >
       <Image
         src={heyImage}
-        alt={"Саша машет Вам рукой!"}
+        alt=""
         class={"object-contain ml-3 md:ml-20 mx-auto w-auto"}
         height={184}
       />
@@ -38,7 +41,11 @@ const translatePath = useTranslatedPath(lang);
     {
       projects.map((project) => {
         const href = translatePath(`/projects/${project.id}`);
-        return <ProjectCard {project} {href} client:load />;
+        return (
+          <ProjectCard {project} {href} client:load>
+            <ProjectCardLinks {project} newTabLabel={t("links.newTab")} />
+          </ProjectCard>
+        );
       })
     }
   </div>

@@ -1,6 +1,6 @@
 ---
 import "@/assets/fonts/shadows-into-light-font.css";
-import { getLangFromUrl } from "@/i18n/utils";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { cn } from "@/lib/utils/styles";
 import "@/styles/global.css";
 import "@fontsource/source-sans-3/200.css";
@@ -12,15 +12,17 @@ import "@fontsource/source-sans-3/700.css";
 import "@fontsource/source-sans-3/800.css";
 import "@fontsource/source-sans-3/900.css";
 import { ClientRouter } from "astro:transitions";
-import { Toaster } from "svelte-sonner";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import MotionToggle from "../components/MotionToggle.astro";
 
 interface Props {
   class?: string;
+  languageFallback?: string;
 }
-const { class: className } = Astro.props;
+const { class: className, languageFallback } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!doctype html>
@@ -29,6 +31,7 @@ const lang = getLangFromUrl(Astro.url);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="origin" />
+    <meta name="theme-color" content="#090f16" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <slot name="head" />
@@ -46,12 +49,13 @@ const lang = getLangFromUrl(Astro.url);
       className
     )}
   >
+    <a href="#main-content" class="skip-link">{t("a11y.skipContent")}</a>
+    <MotionToggle />
     <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise">
     </div>
-    <Header />
+    <Header {languageFallback} />
     <slot />
     <Footer />
 
-    <Toaster theme="dark" client:only="svelte" position="bottom-right" />
   </body>
 </html>

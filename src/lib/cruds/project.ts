@@ -5,10 +5,11 @@ export const getProjectsWithTechnologies = async (lang: Lang) => {
   const collection = await getCollection("project");
   return await Promise.all(
     collection
-      .filter((p) => p.id.startsWith(lang))
+      .filter((p) => p.id.startsWith(`${lang}/`))
+      .sort((a, b) => a.data.order - b.data.order || a.data.id.localeCompare(b.data.id, "en"))
       .map(async (p) => {
         const techs = await getEntries(
-          p.data.techs.map((t) => ({ ...t, id: "ru" + "/" + t.id }))
+          p.data.techs.map((t) => ({ ...t, id: `${lang}/${t.id}` }))
         );
         return {
           ...p.data,

@@ -8,9 +8,11 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout class="overflow-clip">
+<Layout class="overflow-clip" languageFallback="/">
   <SeoFragment slot="head" title="JavaScript разработчик" />
   <main
+    id="main-content"
+    tabindex="-1"
     class="flex flex-col justify-center items-center h-svh text-center px-4"
   >
     <h1 class="text-7xl sm:text-8xl font-bold">404</h1>

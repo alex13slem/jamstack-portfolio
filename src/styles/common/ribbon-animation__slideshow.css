@@ -1,9 +1,77 @@
-.ribbon-animation__slideshow {
-  animation: ribbon-animation__slideshow 40s linear infinite alternate;
+.tech-ribbon {
+  display: block;
+  position: relative;
+  padding-block: 4rem;
+  overflow: clip;
+  z-index: 20;
+}
+
+.tech-ribbon__band {
+  color: #090f16;
+  background: #fff;
+  transform: rotate(3deg) scale(1.01);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.tech-ribbon__track {
+  display: flex;
+  inline-size: max-content;
+  animation: ribbon-animation__slideshow 60s linear infinite;
+  animation-play-state: paused;
+}
+
+.tech-ribbon__list {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0.4rem 1.5rem 0.4rem 0;
+  list-style: none;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tech-ribbon__list li::after {
+  content: "·";
+  margin-inline-start: 1.5rem;
+}
+
+html[data-motion] .tech-ribbon__track {
+  animation-play-state: var(--auto-motion-play-state, paused);
 }
 
 @keyframes ribbon-animation__slideshow {
-  to {
-    translate: -50%;
+  to { transform: translateX(-50%); }
+}
+
+/* Without a working control, keep every technology readable and stationary. */
+html:not([data-motion]) .tech-ribbon__track {
+  inline-size: auto;
+  animation: none;
+}
+html:not([data-motion]) .tech-ribbon__list {
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 20px;
+  letter-spacing: normal;
+}
+html:not([data-motion]) .tech-ribbon__copy { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-ribbon__track { inline-size: auto; animation: none; }
+  .tech-ribbon__list {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 20px;
+    letter-spacing: normal;
   }
+  .tech-ribbon__copy { display: none; }
 }

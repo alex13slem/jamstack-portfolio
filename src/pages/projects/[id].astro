@@ -28,10 +28,3 @@ const { project } = Astro.props;
 
   <DetailPage {project} />
 </Layout>
-
-<script>
-  import { suggestRussianVersion } from "@/i18n/utils";
-
-  document.addEventListener("DOMContentLoaded", suggestRussianVersion);
-  document.addEventListener("astro:page-load", suggestRussianVersion);
-</script>

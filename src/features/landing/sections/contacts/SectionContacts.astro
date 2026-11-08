@@ -1,43 +1,22 @@
 ---
 import linesPNG from "@/assets/img/Lines.png";
-import Button from "@/common/components/ui/button/Button.svelte";
+import EmailContact from "@/common/components/EmailContact.astro";
 import configJson from "@/common/config.json";
-import type { Lang } from "@/i18n/ui";
-import { getLangFromUrl } from "@/i18n/utils";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { getSocials } from "@/lib/cruds/social";
-import type { SocialId } from "@/lib/schemas/social";
 import { cn } from "@/lib/utils/styles";
 import { Icon } from "astro-iconify";
 import { Image } from "astro:assets";
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const section = configJson[lang].section_contacts;
-const socials = await getSocials(lang);
-
-const getButtonText = (id: SocialId, lang: Lang) => {
-  const labels: Record<Lang, Record<SocialId, string>> = {
-    en: {
-      telegram: "Message me on Telegram",
-      github: "View my GitHub",
-      vk: "Message me on VK",
-      hh: "View my CV on hh.ru",
-      linkedin: "Connect on LinkedIn",
-    },
-    ru: {
-      telegram: "Написать в Telegram",
-      github: "Открыть GitHub",
-      vk: "Написать во ВКонтакте",
-      hh: "Резюме на hh.ru",
-      linkedin: "Профиль в LinkedIn",
-    },
-  } as const;
-
-  return labels[lang][id];
-};
+const { email } = configJson[lang].hero_contact;
+const socials = (await getSocials(lang)).sort((a, b) => a.id.localeCompare(b.id, "en"));
 ---
 
-<section class="pt-36 pb-44 md:py-36">
+<section id="contacts" class="pt-36 pb-44 md:py-36">
   <div
     class={cn(`
 container max-w-5xl relative md:overflow-visible`)}
@@ -45,7 +24,7 @@ container max-w-5xl relative md:overflow-visible`)}
     <div class="absolute inset-0 -z-10">
       <Image
         src={linesPNG}
-        alt="Lines"
+        alt=""
         class="-translate-y-[1px] w-full h-[70vh] lg:h-auto absolute bottom-0 pointer-events-none -z-10"
       />
       <div
@@ -71,20 +50,21 @@ font-bold text-4xl sm:text-5xl bg-clip-text white_gradient text-transparent lead
     >
       {section.proposal}
     </p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-14 md:mt-20">
+    <EmailContact {email} />
+    <nav class="contact-socials" aria-label={t("contacts.socials")}>
       {
         socials.map((social) => (
-          <article class="text-center flex flex-col items-center gap-3">
+          <a class="contact-social-link" href={social.url} target="_blank" rel="noopener noreferrer"
+            aria-label={`${social.name} (${t("links.newTab")})`}>
             <Icon
               name={social.iconify_id}
-              class="size-16 text-white text-opacity-90"
+              class="size-5"
+              aria-hidden="true"
             />
-            <Button variant="fill" href={social.url} external>
-              {getButtonText(social.id, lang)}
-            </Button>
-          </article>
+            <span>{social.name}</span>
+          </a>
         ))
       }
-    </div>
+    </nav>
   </div>
 </section>

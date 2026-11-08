@@ -2,7 +2,7 @@
   import HoverEffectImage from "@/common/components/hover-effect-image/HoverEffectImage.svelte";
   import type { ProjectWithTechs } from "@/lib/cruds/project";
   import { cn } from "@/lib/utils/styles";
-  import Icon from "@iconify/svelte";
+  import type { Snippet } from "svelte";
   import type HoverEffect from "hover-effect";
   import type { HTMLAttributes } from "svelte/elements";
   
@@ -10,15 +10,21 @@
     class: className,
     project,
     href,
+    children,
     ...props
   }: HTMLAttributes<HTMLElement> & {
     project: ProjectWithTechs;
     href?: string;
+    children: Snippet;
   } = $props();
 
   let rootEl = $state<HTMLElement>();
 
   let hoverEffect = $state<HoverEffect>();
+
+  function showCover() {
+    if (!rootEl?.matches(":hover, :focus-within")) hoverEffect?.previous();
+  }
 </script>
 
 <article
@@ -26,13 +32,13 @@
   onmouseenter={() => {
     hoverEffect?.next();
   }}
-  onmouseleave={() => {
-    hoverEffect?.previous();
-  }}
+  onmouseleave={showCover}
+  onfocusin={() => hoverEffect?.next()}
+  onfocusout={showCover}
   class={cn(
     `p-[2px] overflow-hidden z-10
     rounded-[0.80rem] animate-gradient__rotate animate-gradient__activeXs
-    relative group`,
+    relative group project-card`,
     className
   )}
   {...props}
@@ -46,15 +52,16 @@
       `)}
   >
     {#if href}
-      <a {href} class="absolute inset-0 opacity-0">.</a>
+      <a {href} aria-labelledby={`project-title-${project.id}`} class="project-card__link"></a>
     {/if}
     <HoverEffectImage
       image1={project.image_cover}
       image2={project.image_preview}
+      alt={project.name}
       bind:hoverEffect
       class={cn(`
                bg-[#0D1420]
-               h-[300px] w-full
+               aspect-[4/3] w-full
                rounded-xl
                overflow-clip pointer-events-none
                `)}
@@ -66,12 +73,13 @@
           class={`
           text-base text-gray-300 group-hover:text-opacity-100
           text-opacity-80 font-medium
-          transition-all duration-200
+          transition-colors duration-200
           `}
         >
           {project.role}
         </p>
         <h3
+          id={`project-title-${project.id}`}
           class={`
           white_gradient
           font-bold bg-clip-text text-transparent text-3xl
@@ -83,35 +91,8 @@
 
       <hr class="border-white opacity-10" />
 
-      <div
-        class="flex items-center justify-between gap-3 relative z-20 flex-col lg:flex-row"
-      >
-        <div class="flex items-center gap-3 flex-wrap">
-          {#each project.techs as t}
-            <a
-              href={t.url}
-              target="_blank"
-              class={cn(`
-                text-xl opacity-60
-                hover:opacity-90 transition-all duration-200
-              `)}
-            >
-              <Icon ssr icon={t.iconify_id} />
-            </a>
-          {/each}
-        </div>
-        <div>
-          <a
-            href={project.github_url}
-            class={cn(`text-xl opacity-60
-              hover:opacity-90 transition-all duration-200`)}
-            target="_blank"
-          >
-            <Icon icon="octicon:logo-github-24" />
-          </a>
-        </div>
-      </div>
+      {@render children()}
     </div>
   </div>
-  <i></i>
+  <i aria-hidden="true"></i>
 </article>

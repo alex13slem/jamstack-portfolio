@@ -11,14 +11,3 @@ const t = useTranslations("en");
   <SeoFragment slot="head" title={t("landing.title")} />
   <LandingPage />
 </Layout>
-
-<script>
-  import { suggestRussianVersion } from "@/i18n/utils";
-
-  document.addEventListener("DOMContentLoaded", suggestRussianVersion, {
-    once: true,
-  });
-  document.addEventListener("astro:page-load", suggestRussianVersion, {
-    once: true,
-  });
-</script>

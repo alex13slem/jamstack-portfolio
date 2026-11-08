@@ -1,7 +1,7 @@
 ---
 import Button from "@/common/components/ui/button/Button.svelte";
 import configJson from "@/common/config.json";
-import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "@/i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
@@ -10,6 +10,7 @@ const { email } = config.hero_contact;
 const { site_name } = config;
 
 const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <footer class="backdrop-blur-xs">
@@ -20,7 +21,7 @@ const t = useTranslations(lang);
     class="container flex flex-col md:flex-row justify-between items-center py-4 gap-4"
   >
     <div class="flex flex-col gap-2">
-      <a class="site-logo" href="/">
+      <a class="site-logo" href={translatePath("/")}>
         {site_name}
       </a>
       <a href={`mailto:${email}`} class="text-white/60 font-medium text-sm"

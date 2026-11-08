@@ -1,0 +1,56 @@
+---
+import Button from "@/common/components/ui/button/Button.svelte";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+interface Props { email: string; }
+const { email } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<email-contact class="contact-email" data-email={email}>
+  <a class="contact-email__address" href={`mailto:${email}`}>{email}</a>
+  <div class="contact-email__actions">
+    <Button variant="fill" href={`mailto:${email}`}>{t("contacts.writeEmail")}</Button>
+    <Button variant="subtle" type="button" class="contact-copy" data-copy-email hidden
+      data-success={t("contacts.copied")} data-error={t("contacts.copyError")}>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="8" y="8" width="12" height="12" rx="2" />
+        <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+      </svg>
+      {t("contacts.copyEmail")}
+    </Button>
+  </div>
+  <p class="contact-copy__feedback" data-copy-feedback role="status" aria-live="polite" aria-atomic="true"></p>
+</email-contact>
+
+<script>
+  class EmailContact extends HTMLElement {
+    private copy = async () => {
+      const button = this.querySelector<HTMLButtonElement>("[data-copy-email]");
+      const feedback = this.querySelector<HTMLElement>("[data-copy-feedback]");
+      if (!button || !feedback) return;
+      button.disabled = true;
+      feedback.textContent = "";
+      try {
+        await navigator.clipboard.writeText(this.dataset.email ?? "");
+        if (this.isConnected) feedback.textContent = button.dataset.success ?? "";
+      } catch {
+        if (this.isConnected) feedback.textContent = button.dataset.error ?? "";
+      } finally {
+        button.disabled = false;
+      }
+    };
+
+    connectedCallback() {
+      const button = this.querySelector<HTMLButtonElement>("[data-copy-email]");
+      if (!button) return;
+      button.hidden = false;
+      button.addEventListener("click", this.copy);
+    }
+
+    disconnectedCallback() {
+      this.querySelector("[data-copy-email]")?.removeEventListener("click", this.copy);
+    }
+  }
+  if (!customElements.get("email-contact")) customElements.define("email-contact", EmailContact);
+</script>

@@ -2,11 +2,12 @@ import { reference, z } from "astro:content";
 
 export const ProjectCollectionSchema = z.object({
   id: z.string(),
+  order: z.number().int().nonnegative().default(100),
   name: z.string(),
   description: z.string(),
   role: z.string(),
   site_url: z.string().url().optional(),
-  github_url: z.string().url(),
+  github_url: z.string().url().optional(),
   image_cover: z.string(),
   image_preview: z.string(),
   techs: z.array(reference("tech")),

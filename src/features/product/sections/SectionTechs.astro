@@ -39,8 +39,9 @@ const t = useTranslations(lang);
           class={cn(`text-2xl flex justify-center items-center
                   text-white/60 hover:text-white/90 transition-colors`)}
           title={t.name}
+          aria-label={t.name}
         >
-          <Icon name={t.iconify_id} className="size-5" />
+          <Icon name={t.iconify_id} className="size-5" aria-hidden="true" />
         </a>
       ))
     }

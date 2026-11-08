@@ -2,74 +2,62 @@
   pointer-events: none;
   position: absolute;
   inset: 0;
+  overflow: clip;
   z-index: -1;
   padding: 2px;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 0.2s;
+  transition: opacity 0.2s;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   border-radius: inherit;
   filter: blur(10px);
 }
 
-.animate-gradient__rotate:hover i:before {
-  opacity: 1;
-  animation: hover-spin__animation 5s linear infinite;
-}
-
-.animate-gradient__rotate i:before {
+.animate-gradient__rotate i::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  display: block;
+  width: 200%;
+  padding-bottom: 200%;
   border-radius: 9999px;
   opacity: 0;
   background: conic-gradient(
-    from 180deg at 50% 50%,
-    #ffc8752c 0deg,
-    #ffeaca 10deg,
-    #ffc875 25deg,
-    #a787ff 112.5deg,
-    #66e3ff 203.75deg,
-    #d2f7ff 213.75deg,
-    #66e3ff 228.75deg,
-    rgba(42, 138, 246, 0) 1turn
+    from 180deg, #ffc8752c, #ffeaca 10deg, #ffc875 25deg,
+    #a787ff 112.5deg, #66e3ff 203.75deg, #d2f7ff 213.75deg,
+    #66e3ff 228.75deg, transparent 1turn
   );
-  width: calc(100% * 2);
-  padding-bottom: calc(100% * 2);
   transform: translate(-50%, -50%);
-  z-index: -1;
-  will-change: transform;
   transition: opacity 0.2s;
 }
 
-.animate-gradient__activeXs.animate-gradient__rotate i:before {
+.animate-gradient__rotate:is(:hover, :focus-within) i::before,
+.animate-gradient__activeXs.animate-gradient__rotate i::before {
   opacity: 1;
 }
 
 @media (min-width: 1024px) {
-  .animate-gradient__activeXs.animate-gradient__rotate i:before {
+  .animate-gradient__activeXs.animate-gradient__rotate:not(:hover):not(:focus-within) i::before {
     opacity: 0;
   }
 }
 
-.animate-gradient__activeXs.animate-gradient__rotate i:before {
-  animation: hover-spin__animation 5s linear infinite;
+@media (prefers-reduced-motion: no-preference) {
+  .site-button.animate-gradient__rotate:hover:not(:focus-visible) i::before,
+  .motion-toggle.animate-gradient__rotate:hover:not(:focus-visible):not(:disabled) i::before,
+  :is(.project-card, .project-thumbnail).animate-gradient__rotate:hover:not(:focus-within) i::before {
+    animation: hover-spin__animation 5s linear infinite;
+    animation-play-state: var(--auto-motion-play-state, paused);
+  }
 }
 
-.animate-gradient__activeXs.animate-gradient__rotate:hover i:before {
-  opacity: 1;
-  animation: hover-spin__animation 5s linear infinite;
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  html[data-motion] .animate-gradient__activeXs.animate-gradient__rotate:not(:focus-within) i::before {
+    animation: hover-spin__animation 5s linear infinite;
+    animation-play-state: var(--auto-motion-play-state, paused);
+  }
 }
 
 @keyframes hover-spin__animation {
-  0% {
-    transform: translate(-50%, -50%) rotate(1turn);
-  }
-
-  to {
-    transform: translate(-50%, -50%) rotate(0);
-  }
+  from { transform: translate(-50%, -50%) rotate(1turn); }
+  to { transform: translate(-50%, -50%) rotate(0); }
 }
