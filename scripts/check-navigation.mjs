@@ -51,7 +51,7 @@ for (const locale of ['en', 'ru']) {
       assert.deepEqual($('.project-card__link').map((_, el) => $(el).attr('href')).get(), [
         `${home}projects/integra-metal`, `${home}projects/jamstack-portfolio`,
       ], `${route}: stable project order`);
-      assert.equal($('email-contact').attr('data-email'), config[locale].hero_contact.email);
+      assert.equal($('.contact-email[data-email]').attr('data-email'), config[locale].hero_contact.email);
       assert.equal($('.contact-email__address').attr('href'), `mailto:${config[locale].hero_contact.email}`);
       assert.equal($('[data-copy-email][hidden]').length, 1, `${route}: progressive clipboard control`);
       assert.equal($('[data-copy-feedback][role="status"][aria-live="polite"]').length, 1);

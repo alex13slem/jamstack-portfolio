@@ -5,7 +5,7 @@ import configJson from "@/common/config.json";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import { parse } from "marked";
-import HeroEpithets from "./HeroEpithets";
+import HeroEpithets from "./HeroEpithets.svelte";
 
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
@@ -16,7 +16,7 @@ const { section_hero } = config;
 const t = useTranslations(lang);
 ---
 
-<section class="pb-28 pt-16 md:py-28">
+<section class="pb-24 pt-12 md:pt-20 md:pb-24">
   <div class="container relative z-1 max-w-4xl grid grid-cols-1 gap-8">
     <Image
       src={linesPNG}

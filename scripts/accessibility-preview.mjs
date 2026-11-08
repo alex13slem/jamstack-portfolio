@@ -32,6 +32,14 @@ const noWebGL = `<script>
   };
 </script>`;
 
+// A deterministic API rejection exercises error feedback even when browser
+// automation grants clipboard access independently of Permissions-Policy.
+const clipboardDenied = `<script>
+  Object.defineProperty(navigator.clipboard, 'writeText', {
+    value: async () => { throw new DOMException('Clipboard denied by QA fixture', 'NotAllowedError'); }
+  });
+</script>`;
+
 for (const [index, mode] of ['normal', 'no-js', 'no-webgl', 'reduced-motion', 'no-clipboard'].entries()) {
   createServer(async (req, res) => {
     try {
@@ -43,7 +51,7 @@ for (const [index, mode] of ['normal', 'no-js', 'no-webgl', 'reduced-motion', 'n
       if (mode === 'no-js') res.setHeader('Content-Security-Policy', "script-src 'none'; object-src 'none'");
       if (mode === 'no-clipboard') res.setHeader('Permissions-Policy', 'clipboard-write=()');
       if (extension === '.html') {
-        const fixture = mode === 'no-webgl' ? noWebGL : mode === 'reduced-motion' ? forcedMotion : '';
+        const fixture = mode === 'no-webgl' ? noWebGL : mode === 'reduced-motion' ? forcedMotion : mode === 'no-clipboard' ? clipboardDenied : '';
         data = Buffer.from(data.toString().replace('<head>', `<head><meta name="qa-mode" content="${mode}">${fixture}`));
       }
       // Exercise the real reduced-motion declarations and JS branch. This is

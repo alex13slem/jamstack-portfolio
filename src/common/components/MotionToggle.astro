@@ -1,26 +1,10 @@
 ---
+import MotionToggle from "./MotionToggle.svelte";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
-
-<button type="button" role="switch" class="motion-toggle animate-gradient__rotate animate-gradient__activeXs" data-motion-toggle hidden
-  aria-label={t("motion.label")} aria-checked="false"
-  data-on-label={t("motion.on")} data-off-label={t("motion.off")}
-  data-reduced-label={t("motion.reduced")}>
-  <span class="motion-toggle__icon" aria-hidden="true">
-    <svg class="motion-toggle__pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6 4h4v16H6zm8 0h4v16h-4z" />
-    </svg>
-    <svg class="motion-toggle__play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="m8 4 12 8-12 8z" />
-    </svg>
-  </span>
-  <span class="motion-toggle__label" aria-hidden="true">
-    <span>{t("motion.shortLabel")}: <span class="motion-toggle__status" data-motion-status>{t("motion.off")}</span></span>
-  </span>
-  <i aria-hidden="true"></i>
-</button>
-
+<MotionToggle labels={{ label: t("motion.label"), short: t("motion.shortLabel"), on: t("motion.on"), off: t("motion.off"), reduced: t("motion.reduced") }} client:load />
 <script>
-  import "@/common/scripts/motion";
+  import { initializeMotion } from "@/common/scripts/motion";
+  initializeMotion();
 </script>
