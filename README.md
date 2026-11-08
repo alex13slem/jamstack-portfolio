@@ -10,19 +10,17 @@ I fully implemented the project, including frontend, interactivity, and infrastr
 
 - [**Astro JS (SSG)**](https://astro.build/) — static site generation for fast performance and SEO-friendly pages.
 - [**Svelte**](https://svelte.dev/) — interactive components and dynamic islands.
-- [**React**](https://react.dev/) — used for hybrid dynamic functionality and flexible UI components.
 - [**TailwindCSS**](https://tailwindcss.com/) + [**@tailwindcss/typography**](https://tailwindcss.com/docs/typography-plugin) — responsive, modern, and maintainable styling.
 - [**TypeScript**](https://www.typescriptlang.org/) — safe and predictable code.
 - [**Iconify**](https://iconify.design/) — vector icons integration.
 - [**hover-effect**](https://github.com/robin-dela/hover-effect) — interactive image transitions and effects.
 - [**marked**](https://github.com/markedjs/marked) — Markdown content rendering.
-- [**react-textra**](https://www.npmjs.com/package/react-textra) & [**svelte-sonner**](https://svelte-sonner.vercel.app) — advanced text interactions and notifications.
 - [**@fontsource/source-sans-3**](https://fontsource.org/fonts/source-sans-3) — clean and readable typography.
 - [**Sveltia**](https://github.com/sveltia/sveltia-cms) — Git-based CMS for managing website content directly via repository.
 
 ## ✨ Features
 
-- **Interactive Islands:** Dynamic components using Svelte + React for fast, responsive UI.
+- **Interactive Islands:** Dynamic components using Svelte for fast, responsive UI.
 - **Animations & Effects:** Smooth hover transitions and notifications for modern UX.
 - **Markdown Content:** Easily manage portfolio content via Markdown files.
 - **Git-based CMS:** Full content administration via **Sveltia**, no backend required.
@@ -41,7 +39,6 @@ The website is **deployed on&#32;[Cloudflare Pages](https://pages.cloudflare.com
 
 ![Svelte](https://img.shields.io/badge/Svelte-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
 
-![React](https://img.shields.io/badge/React-61DAFB?logo=react\&logoColor=000\&style=flat)
 
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06b6d4?logo=tailwind-css\&logoColor=fff\&style=flat)
 
@@ -52,3 +49,14 @@ The website is **deployed on&#32;[Cloudflare Pages](https://pages.cloudflare.com
 ![Sveltia](https://img.shields.io/badge/Sveltia-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
 
 ![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflare\&logoColor=fff\&style=flat)
+
+## Local validation
+
+- `npm run check` — Svelte diagnostics and TypeScript.
+- `npm run build` — static production build.
+- `npm run check:pages` — accessibility and localized routes in the built HTML.
+
+Astro renders the content and fallback images on the server. Svelte handles the
+interactive islands; the gallery and clipboard widget hydrate when visible.
+Shared motion preferences stay in TypeScript. Layout utilities use Tailwind;
+Swiper zoom constraints, dialog backdrop and complex motion use scoped or shared CSS.
