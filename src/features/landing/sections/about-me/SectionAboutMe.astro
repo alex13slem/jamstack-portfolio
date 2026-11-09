@@ -1,7 +1,6 @@
 ---
 import classImg from "@/assets/img/stickers/class.png";
-import thinkAboutThisImg from "@/assets/img/stickers/ThkAbtIt.png";
-import configJson from "@/common/config.json";
+import configJson from "@/common/config";
 import { getLangFromUrl } from "@/i18n/utils";
 import { Image } from "astro:assets";
 
@@ -10,59 +9,92 @@ const { section_about } = configJson[lang];
 const textWords = section_about.text.split(/\s+/);
 ---
 
-<section id="about-me" aria-labelledby="about-title" class="pt-36 pb-28 md:py-36">
-  <div class="container relative">
-    <div class="absolute inset-0 -z-10" aria-hidden="true">
-      <Image src={thinkAboutThisImg} alt="" width={210}
-        class="absolute left-0 xl:left-5 top-0 -translate-y-full md:-translate-y-3/4 xl:translate-y-0 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none" />
-      <Image src={classImg} alt="" width={210}
-        class="absolute bottom-0 right-0 lg:right-5 translate-y-full lg:translate-y-0 md:translate-y-3/4 w-[9rem] md:w-[11rem] lg:w-auto pointer-events-none" />
+<section id="about-me" aria-labelledby="about-title" class="about">
+  <div class="container about-layout">
+    <div class="about-copy">
+      <h2
+        id="about-title"
+        class="white_gradient mb-3 bg-clip-text text-sm font-extrabold text-balance text-transparent uppercase"
+      >
+        {section_about.title}
+      </h2>
+      <p class="about-intro text-cyangrey">
+        <scroll-highlight class="about-highlight">
+          {textWords.map((word) => (
+            <Fragment>
+              <span class="about-word">{word}</span>{" "}
+            </Fragment>
+          ))}
+        </scroll-highlight>
+      </p>
+      {section_about.interests && (
+        <p class="about-interests text-yellowgrey">{section_about.interests}</p>
+      )}
     </div>
-    <h2 id="about-title" class="text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase mb-4">
-      {section_about.title}
-    </h2>
-    <p class="font-semibold text-3xl md:text-5xl lg:text-7xl text-center w-full mx-auto max-w-5xl leading-tight">
-      <scroll-highlight class="about-highlight">
-        {textWords.map((word, index) => (
-          <Fragment>
-            <span class="about-word bg-clip-text text-transparent white_gradient" style={`--word-delay: ${index * 35}ms`}>{word}</span>{" "}
-          </Fragment>
-        ))}
-      </scroll-highlight>
-    </p>
-    {section_about.interests && <p class="about-interests">{section_about.interests}</p>}
+    <Image
+      src={classImg}
+      alt=""
+      width={256}
+      loading="lazy"
+      class="about-sticker"
+    />
   </div>
 </section>
 
 <style>
-  .about-interests {
-    max-width: 48rem;
-    margin: 2rem auto 0;
-    color: #c8c8c3;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    text-align: center;
+  .about {
+    padding-block: clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 3vw, 3rem);
+  }
+  .about-layout {
+    display: grid;
+    row-gap: 0.75rem;
+    max-inline-size: 54rem;
+  }
+  .about-copy {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+  .about-intro {
+    max-inline-size: 42ch;
+    font-size: clamp(1.375rem, 2.5vw + 0.75rem, 2.25rem);
+    font-weight: 600;
+    line-height: 1.4;
     text-wrap: pretty;
+  }
+  .about-interests {
+    max-inline-size: 60ch;
+    margin-block-start: 1rem;
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .about-sticker {
+    justify-self: end;
+    inline-size: clamp(7.5rem, 35vw, 8.5rem);
+    block-size: auto;
+  }
+  @media (min-width: 48rem) {
+    .about-layout {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: clamp(2rem, 4vw, 3rem);
+    }
+    .about-sticker {
+      inline-size: clamp(7rem, 10vw, 8rem);
+    }
   }
   .about-word {
     display: inline-block;
-    opacity: 1;
+    max-inline-size: 100%;
   }
 
-  .about-highlight[data-animated="true"] .about-word {
-    opacity: 0.4;
-    transition: opacity 200ms ease;
-    transition-delay: var(--word-delay, 0ms);
-  }
-
-  .about-highlight[data-animated="true"] .about-word[data-visible="true"] {
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .about-highlight .about-word {
-      opacity: 1 !important;
-      transition: none !important;
+  @media (prefers-reduced-motion: no-preference) {
+    .about-highlight[data-animated="true"] .about-word {
+      opacity: 0.76;
+      transition: opacity 180ms ease var(--word-delay, 0ms);
+    }
+    .about-highlight[data-animated="true"] .about-word[data-visible="true"] {
+      opacity: 1;
     }
   }
 </style>
@@ -74,22 +106,33 @@ const textWords = section_about.text.split(/\s+/);
 
     private setup = () => {
       this.observer?.disconnect();
-      if (this.motion?.matches || document.documentElement.dataset.motion !== "running"
-        || !("IntersectionObserver" in window)) {
+      if (
+        this.motion?.matches ||
+        document.documentElement.dataset.motion !== "running" ||
+        !("IntersectionObserver" in window)
+      ) {
         this.removeAttribute("data-animated");
         return;
       }
 
-      this.observer = new IntersectionObserver((entries, observer) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          (entry.target as HTMLElement).dataset.visible = "true";
-          observer.unobserve(entry.target);
-        }
-      }, { threshold: 0.5 });
+      this.observer = new IntersectionObserver(
+        (entries, observer) => {
+          let delay = 0;
+          for (const entry of entries) {
+            if (entry.intersectionRatio < 0.5) continue;
+            const word = entry.target as HTMLElement;
+            word.style.setProperty("--word-delay", `${Math.min(delay, 120)}ms`);
+            word.dataset.visible = "true";
+            observer.unobserve(word);
+            delay += 20;
+          }
+        },
+        { threshold: 0.5 },
+      );
 
-      this.querySelectorAll<HTMLElement>(".about-word:not([data-visible='true'])")
-        .forEach((word) => this.observer?.observe(word));
+      this.querySelectorAll<HTMLElement>(
+        ".about-word:not([data-visible='true'])",
+      ).forEach((word) => this.observer?.observe(word));
       this.dataset.animated = "true";
     };
 
@@ -107,5 +150,6 @@ const textWords = section_about.text.split(/\s+/);
     }
   }
 
-  if (!customElements.get("scroll-highlight")) customElements.define("scroll-highlight", ScrollHighlight);
+  if (!customElements.get("scroll-highlight"))
+    customElements.define("scroll-highlight", ScrollHighlight);
 </script>

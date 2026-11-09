@@ -13,7 +13,7 @@
     },
     "section_about": {
       "title": "About me",
-      "text": "I work on interfaces, server-side logic and integrations. I extend existing systems, connect applications and set up content management.",
+      "text": "I extend existing websites and portals. I start by understanding how they work, then add new features in small steps.",
       "interests": "I’m interested in Go and mobile development, and open to collaborative learning projects in these areas."
     },
     "section_contacts": {
@@ -41,7 +41,7 @@
     },
     "section_about": {
       "title": "Обо мне",
-      "text": "Работаю над интерфейсами, серверной логикой и интеграциями. Дорабатываю существующие системы, связываю приложения между собой и настраиваю управление контентом.",
+      "text": "Дорабатываю уже работающие сайты и порталы. Сначала разбираюсь, как устроена система, затем добавляю нужные функции по шагам.",
       "interests": "Интересуюсь Go и мобильной разработкой. Открыт к совместным учебным проектам в этих направлениях."
     },
     "section_contacts": {
