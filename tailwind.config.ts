@@ -13,7 +13,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Source Sans 3'", ...defaultTheme.fontFamily.sans],
+        sans: ["'Source Sans 3 Variable'", ...defaultTheme.fontFamily.sans],
         logo: ["Shadows Into"],
       },
       backgroundImage: {

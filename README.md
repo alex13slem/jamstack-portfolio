@@ -10,7 +10,7 @@ Public site: [alex13slem.vercel.app](https://alex13slem.vercel.app/).
 - Tailwind handles layout and base styling; CSS handles complex motion and image-viewer constraints.
 - TypeScript and Zod validate code and content.
 - Sveltia CMS edits projects, experience, technologies and site settings.
-- Swiper handles case galleries; hover-effect provides optional WebGL image transitions with HTML fallbacks.
+- Swiper handles case galleries. Project cards load WebGL previews on devices that support hover and serve static HTML covers on devices without hover.
 
 ## Local development
 

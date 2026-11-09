@@ -1,6 +1,7 @@
 <script lang="ts">
   import HoverEffectImage from "@/common/components/hover-effect-image/HoverEffectImage.svelte";
   import type { ProjectWithTechs } from "@/lib/cruds/project";
+  import type { ResponsiveProjectImage } from "@/lib/media/project-images";
   import { cn } from "@/lib/utils/styles";
   import type { Snippet } from "svelte";
   import type HoverEffect from "hover-effect";
@@ -9,12 +10,16 @@
   let {
     class: className,
     project,
+    cover,
+    preview,
     href,
     caseLabel,
     children,
     ...props
   }: HTMLAttributes<HTMLElement> & {
     project: ProjectWithTechs;
+    cover: ResponsiveProjectImage;
+    preview: ResponsiveProjectImage;
     href?: string;
     caseLabel: string;
     children: Snippet;
@@ -65,8 +70,8 @@
       </a>
     {/if}
     <HoverEffectImage
-      image1={project.image_cover}
-      image2={project.image_preview}
+      {cover}
+      {preview}
       alt={project.name}
       bind:hoverEffect
       class={cn(`

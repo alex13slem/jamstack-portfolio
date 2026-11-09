@@ -1,23 +1,30 @@
 <script lang="ts">
   import type HoverEffect from "hover-effect";
   import type { HoverEffectOptions } from "hover-effect";
+  import { projectPreviewMedia } from "@/common/scripts/motion";
+  import type { ResponsiveProjectImage } from "@/lib/media/project-images";
   import { onMount } from "svelte";
-  import displacement4 from "./displacement4.png";
+  import displacement4 from "./displacement4.webp";
 
   let {
     intensity1 = 0.1,
     intensity2 = 0.1,
     angle2 = Math.PI / 2,
     imagesRatio,
-    image1,
-    image2,
+    cover,
+    preview,
     alt = "",
     displacementImage = displacement4.src,
     class: className,
     hoverEffect = $bindable(),
     ...props
-  }: Omit<HoverEffectOptions, "displacementImage" | "parent"> & {
+  }: Omit<
+    HoverEffectOptions,
+    "displacementImage" | "parent" | "image1" | "image2"
+  > & {
     class: string;
+    cover: ResponsiveProjectImage;
+    preview: ResponsiveProjectImage;
     alt?: string;
     displacementImage?: string;
     hoverEffect?: HoverEffect;
@@ -25,23 +32,33 @@
 
   let rootEl: HTMLElement;
 
+  async function loadTexture(source: ResponsiveProjectImage) {
+    const texture = new Image();
+    texture.sizes = source.sizes;
+    texture.srcset = source.srcset;
+    texture.src = source.src;
+    await texture.decode();
+    return texture.currentSrc || source.src;
+  }
+
   onMount(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const supportsPreview = window.matchMedia(projectPreviewMedia);
     let cancelled = false;
     let initialized = false;
     let effect: HoverEffect | undefined;
     const canAnimate = () =>
       !cancelled &&
-      !motion.matches &&
+      supportsPreview.matches &&
       document.documentElement.dataset.motion === "running";
 
     async function initialize() {
       if (!canAnimate() || initialized) return;
       initialized = true;
       try {
-        const cover = new Image();
-        cover.src = image1;
-        await cover.decode();
+        const [image1, image2] = await Promise.all([
+          loadTexture(cover),
+          loadTexture(preview),
+        ]);
         const HoverEffect = (await import("hover-effect")).default;
         if (!canAnimate()) {
           initialized = false;
@@ -53,7 +70,7 @@
           intensity1,
           intensity2,
           angle2,
-          imagesRatio: imagesRatio ?? cover.naturalHeight / cover.naturalWidth,
+          imagesRatio: imagesRatio ?? cover.height / cover.width,
           image1,
           image2,
           displacementImage,
@@ -83,13 +100,13 @@
       else effect.previous();
     }
 
-    motion.addEventListener("change", onMotionChange);
+    supportsPreview.addEventListener("change", onMotionChange);
     document.addEventListener("portfolio:motion-change", onMotionChange);
     void initialize();
 
     return () => {
       cancelled = true;
-      motion.removeEventListener("change", onMotionChange);
+      supportsPreview.removeEventListener("change", onMotionChange);
       document.removeEventListener("portfolio:motion-change", onMotionChange);
       hoverEffect = undefined;
     };
@@ -98,10 +115,8 @@
 
 <div class={`relative ${className}`}>
   <img
-    src={image1}
+    {...cover}
     {alt}
-    width="1200"
-    height="900"
     loading="lazy"
     class="absolute inset-0 h-full w-full object-cover"
   />

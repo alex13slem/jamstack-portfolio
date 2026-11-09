@@ -120,6 +120,11 @@ html[data-motion]
 html[data-motion="paused"] .hover-effect-canvas {
   visibility: hidden;
 }
+@media (hover: none) {
+  .hover-effect-canvas {
+    display: none;
+  }
+}
 html[data-motion="paused"] .about-word {
   opacity: 1 !important;
 }

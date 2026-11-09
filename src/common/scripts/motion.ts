@@ -3,6 +3,8 @@ export interface MotionState {
   paused: boolean;
   reduced: boolean;
 }
+export const projectPreviewMedia =
+  "(hover: hover) and (prefers-reduced-motion: no-preference)";
 const storageKey = "portfolio-motion-paused";
 const subscribers = new Set<(state: MotionState) => void>();
 let state: MotionState = { enabled: false, paused: true, reduced: false };
