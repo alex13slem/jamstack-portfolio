@@ -1,62 +1,89 @@
-## 🚀 Project: Personal Portfolio Website
+# alex13slem portfolio
 
-Portfolio website showcasing my projects and technical expertise. The main goal was to create a **modern, fast-loading, and interactive website** that demonstrates my skills in frontend development, UI/UX, and content management.
+Bilingual portfolio with project case studies, work experience and contact details.
+Public site: [alex13slem.vercel.app](https://alex13slem.vercel.app/).
 
-## 📋 Role in the Project
+## Stack
 
-I fully implemented the project, including frontend, interactivity, and infrastructure setup. My responsibilities included creating the site architecture, integrating dynamic components, animations, and ensuring high performance. I also integrated **Sveltia**, a Git-based CMS, to manage the website content easily.
+- Astro generates static pages from Markdown content collections.
+- Svelte powers interactive islands, including project cards, the gallery, rotating headline words, email copying and motion controls.
+- Tailwind handles layout and base styling; CSS handles complex motion and image-viewer constraints.
+- TypeScript and Zod validate code and content.
+- Sveltia CMS edits projects, experience, technologies and site settings.
+- Swiper handles case galleries; hover-effect provides optional WebGL image transitions with HTML fallbacks.
 
-## 💼 Technologies
+## Local development
 
-- [**Astro JS (SSG)**](https://astro.build/) — static site generation for fast performance and SEO-friendly pages.
-- [**Svelte**](https://svelte.dev/) — interactive components and dynamic islands.
-- [**TailwindCSS**](https://tailwindcss.com/) + [**@tailwindcss/typography**](https://tailwindcss.com/docs/typography-plugin) — responsive, modern, and maintainable styling.
-- [**TypeScript**](https://www.typescriptlang.org/) — safe and predictable code.
-- [**Iconify**](https://iconify.design/) — vector icons integration.
-- [**hover-effect**](https://github.com/robin-dela/hover-effect) — interactive image transitions and effects.
-- [**marked**](https://github.com/markedjs/marked) — Markdown content rendering.
-- [**@fontsource/source-sans-3**](https://fontsource.org/fonts/source-sans-3) — clean and readable typography.
-- [**Sveltia**](https://github.com/sveltia/sveltia-cms) — Git-based CMS for managing website content directly via repository.
+```sh
+npm install
+npm run dev
+```
 
-## ✨ Features
+The development server uses port 4344. The static build is written to `dist/`.
 
-- **Interactive Islands:** Dynamic components using Svelte for fast, responsive UI.
-- **Animations & Effects:** Smooth hover transitions and notifications for modern UX.
-- **Markdown Content:** Easily manage portfolio content via Markdown files.
-- **Git-based CMS:** Full content administration via **Sveltia**, no backend required.
-- **Type-Safe Setup:** Full TypeScript integration for reliability and maintainability.
-- **Responsive Design:** TailwindCSS ensures mobile-friendly and scalable layouts.
+## Validation
 
-## 🌐 Hosting & Deployment
+```sh
+npm run check
+npm run build
+npm run check:pages
+npm run format:check
+```
 
-The website is **deployed on&#32;[Cloudflare Pages](https://pages.cloudflare.com/)**, using static hosting with serverless functions for forms and interactive integrations. Fully optimized for **fast loading and SEO**.
+`check` runs Astro, Svelte and TypeScript diagnostics. `check:pages` validates accessibility,
+localized navigation and SEO in the generated HTML. `npm run check:seo` can run
+only the metadata, sitemap, social-image and favicon checks after a build.
 
-## 🔗 Contact & Repository
+`npm run format` formats source and configuration with Prettier's Astro, Svelte and
+Tailwind plugins. Markdown content and generated/media assets are excluded. The
+navigation checker uses `tsx` to import the real TypeScript helpers directly.
 
-**Project Repository:** [GitHub](https://github.com/alex13slem/jamstack-portfolio)
+## Shared settings
 
-![Astro JS](https://img.shields.io/badge/Astro%20JS-ff5a03?logo=astro\&logoColor=fff\&style=flat)
+`src/common/config.json` remains the CMS source. Application code imports
+`src/common/config.ts`, which validates settings with the Zod schema in
+`src/lib/schemas/site.ts`. Invalid emails, missing text and empty headline-word
+lists produce validation errors instead of silently reaching the generated pages.
 
-![Svelte](https://img.shields.io/badge/Svelte-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
+`src/i18n/locales.ts` defines supported languages; Astro's native i18n helper builds
+SEO alternate URLs. Client navigation retains query strings and anchors through
+the shared path helper. `src/common/brand.ts` supplies the site and social-image
+palette.
 
+## Social images and favicon
 
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06b6d4?logo=tailwind-css\&logoColor=fff\&style=flat)
+The Svelte social-card template in `src/features/social/` renders on the server during the build.
+Satori converts their HTML to SVG; Sharp produces PNG images. These tools add no
+browser JavaScript. Fonts, project covers and the portrait are local assets.
 
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript\&logoColor=fff\&style=flat)
+Each home page and project receives a localized 1200×630 image under `dist/og/`.
+Project names, summaries, roles, covers and technologies come from the collections.
+Home-page branding, title, description and preview technologies come from site settings. Updating content
+and rebuilding also updates the previews. Image URLs contain a hash of the PNG bytes,
+so changed images receive new URLs.
 
-![Iconify](https://img.shields.io/badge/Iconify-000000?logo=iconify\&logoColor=fff\&style=flat)
+The old manual OG Image field has been replaced by automatic generation. Search
+Title and Site Description remain editable in the CMS. `astro-seo` renders metadata
+through the shared `SeoFragment.astro` wrapper.
 
-![Sveltia](https://img.shields.io/badge/Sveltia-ff3e00?logo=svelte\&logoColor=fff\&style=flat)
+`public/favicon.svg` is the editable source for the number 13 in the logo font and
+gradient. Its glyphs are outlined and need no font download. `astro-favicons`
+generates ICO, SVG, PNG 16/32/48 and the 180 px Apple icon, and injects their links.
+No custom favicon endpoints or PWA manifests are needed.
 
-![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?logo=cloudflare\&logoColor=fff\&style=flat)
+The social-image renderer caches by image inputs and retries failed renders.
+Font files resolve through package exports rather than hardcoded `node_modules`
+paths. The npm `sharp` override shares one native version between Astro, favicon
+generation and social-image rendering; mixed native versions caused a Windows
+DLL-loading failure.
 
-## Local validation
+## Deployment
 
-- `npm run check` — Svelte diagnostics and TypeScript.
-- `npm run build` — static production build.
-- `npm run check:pages` — accessibility and localized routes in the built HTML.
-
-Astro renders the content and fallback images on the server. Svelte handles the
-interactive islands; the gallery and clipboard widget hydrate when visible.
-Shared motion preferences stay in TypeScript. Layout utilities use Tailwind;
-Swiper zoom constraints, dialog backdrop and complex motion use scoped or shared CSS.
+The site targets Vercel static hosting. `astro.config.mjs` and the SEO helpers use
+`https://alex13slem.vercel.app` as the canonical origin. `vercel.json` defines trailing
+slashes, caching for versioned social images and noindex headers for the admin page.
+The official `@astrojs/sitemap` integration discovers public Astro pages and writes
+`sitemap-index.xml` and `sitemap-0.xml` during the build. Locale links and exclusions
+are configured in `src/lib/seo/sitemap.ts`. The CMS is excluded by
+robots rules and noindex metadata. There are no serverless contact forms: contact
+uses email links and copying the address.
