@@ -1,6 +1,7 @@
 .animated-colors__gradient,
 .colors__gradient {
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       66.11% 66.11% at 50% 33.89%,
       hsla(0, 0%, 100%, 0.4) 0,
       hsla(0, 0%, 100%, 0) 100%
@@ -27,6 +28,11 @@
 }
 
 @keyframes animate-colors__gradient {
-  0%, 100% { background-position: 0 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }

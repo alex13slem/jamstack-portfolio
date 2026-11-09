@@ -9,7 +9,12 @@ const t = useTranslations(lang);
 ---
 
 <Layout class="overflow-clip" languageFallback="/">
-  <SeoFragment slot="head" title="JavaScript разработчик" />
+  <SeoFragment
+    slot="head"
+    title={t("404.title")}
+    description={t("404.description")}
+    noindex
+  />
   <main
     id="main-content"
     tabindex="-1"
@@ -17,9 +22,9 @@ const t = useTranslations(lang);
   >
     <h1 class="text-7xl sm:text-8xl font-bold">404</h1>
     <p class="text-lg sm:text-xl mt-4">{t("404.title")}</p>
-    <p class="text-base sm:text-lg text-gray-500">
-      {t("404.description")}
-    </p>
-    <Button href="/" class="mt-8" variant="fill">{t("404.button")}</Button>
+    <p class="text-base sm:text-lg text-gray-500">{t("404.description")}</p>
+    <Button href="/" class="mt-8" variant="fill">
+      {t("404.button")}
+    </Button>
   </main>
 </Layout>

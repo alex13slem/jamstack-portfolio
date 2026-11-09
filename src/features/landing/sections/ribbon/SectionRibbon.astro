@@ -7,19 +7,21 @@ const t = useTranslations(lang);
 const techs = await getRibbonTechs(lang);
 ---
 
-{
-  techs.length > 0 && (
-    <section class="tech-ribbon" aria-label={t("skills.title")}>
-      <div class="tech-ribbon__band">
-        <div class="tech-ribbon__track">
-          <ul role="list" class="tech-ribbon__list">
-            {techs.map((tech) => <li>{tech.name}</li>)}
-          </ul>
-          <ul class="tech-ribbon__list tech-ribbon__copy" aria-hidden="true">
-            {techs.map((tech) => <li>{tech.name}</li>)}
-          </ul>
-        </div>
+{techs.length > 0 && (
+  <section class="tech-ribbon" aria-label={t("skills.title")}>
+    <div class="tech-ribbon__band">
+      <div class="tech-ribbon__track">
+        <ul role="list" class="tech-ribbon__list">
+          {techs.map((tech) => (
+            <li>{tech.name}</li>
+          ))}
+        </ul>
+        <ul class="tech-ribbon__list tech-ribbon__copy" aria-hidden="true">
+          {techs.map((tech) => (
+            <li>{tech.name}</li>
+          ))}
+        </ul>
       </div>
-    </section>
-  )
-}
+    </div>
+  </section>
+)}

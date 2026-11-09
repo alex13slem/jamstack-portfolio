@@ -2,12 +2,10 @@
 import SeoFragment from "@/common/components/SeoFragment.astro";
 import Layout from "@/common/templates/Layout.astro";
 import LandingPage from "@/features/landing/templates/LandingPage.astro";
-import { useTranslations } from "@/i18n/utils";
-
-const t = useTranslations("en");
+import config from "@/common/config";
 ---
 
 <Layout>
-  <SeoFragment slot="head" title={t("landing.title")} />
+  <SeoFragment slot="head" title={config.en.site_title} />
   <LandingPage />
 </Layout>

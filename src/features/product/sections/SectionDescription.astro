@@ -1,18 +1,46 @@
 ---
 import type { ProjectWithTechs } from "@/lib/cruds/project";
 import { cn } from "@/lib/utils/styles";
-interface Props { project: ProjectWithTechs; class?: string; }
+interface Props {
+  project: ProjectWithTechs;
+  class?: string;
+}
 const { project, class: className } = Astro.props;
 ---
 
-<section class={cn("case-description p-5 sm:p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10", className)}>
-  <h1 class="white_gradient font-semibold bg-clip-text text-transparent text-xl leading-snug text-balance" translate="no">{project.name}</h1>
+<section
+  class={cn(
+    "case-description p-5 sm:p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10",
+    className,
+  )}
+>
+  <h1
+    class="white_gradient font-semibold bg-clip-text text-transparent text-xl leading-snug text-balance"
+    translate="no"
+  >
+    {project.name}
+  </h1>
   <p class="mt-2 text-sm text-gray-300 font-medium">{project.role}</p>
   <p class="case-description__text">{project.description}</p>
 </section>
 
 <style>
-  .case-description { display: flex; flex-direction: column; justify-content: flex-start; text-align: left; }
-  .case-description h1 { overflow-wrap: anywhere; }
-  .case-description__text { margin-top: 1rem; max-width: 65ch; color: #dfe5ec; font-size: 1rem; line-height: 1.65; text-wrap: pretty; overflow-wrap: anywhere; }
+  .case-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .case-description h1 {
+    overflow-wrap: anywhere;
+  }
+  .case-description__text {
+    margin-top: 1rem;
+    max-width: 65ch;
+    color: #dfe5ec;
+    font-size: 1rem;
+    line-height: 1.65;
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
 </style>

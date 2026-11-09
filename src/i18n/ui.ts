@@ -4,14 +4,13 @@ export const languages = {
 };
 export const showDefaultLang = false;
 
-export type Lang = keyof typeof languages;
+export type { Lang } from "./locales";
 
-export const defaultLang: Lang = "en";
+export { defaultLang } from "./locales";
 
 interface UiSchema {
   contact_btn_label: string;
   all_rights_reserved: string;
-  "landing.title": string;
   "404.title": string;
   "404.description": string;
   "404.button": string;
@@ -54,7 +53,6 @@ export const ui = {
   en: {
     contact_btn_label: "Contact",
     all_rights_reserved: "All rights reserved.",
-    "landing.title": "Welcome",
     "404.title": "Page not found",
     "404.description": "Check the address or return to the main page",
     "404.button": "Return to the main page",
@@ -87,7 +85,8 @@ export const ui = {
     "contacts.writeEmail": "Send an email",
     "contacts.copyEmail": "Copy email",
     "contacts.copied": "Email copied",
-    "contacts.copyError": "Could not copy. Select the address and copy it manually.",
+    "contacts.copyError":
+      "Could not copy. Select the address and copy it manually.",
     "contacts.socials": "Other ways to connect",
     "experience.present": "Present",
     "experience.technologies": "Technologies used in this role",
@@ -95,7 +94,6 @@ export const ui = {
   ru: {
     contact_btn_label: "Связаться",
     all_rights_reserved: "Все права защищены.",
-    "landing.title": "Добро пожаловать",
     "404.title": "Страница не найдена",
     "404.description": "Проверьте адрес или вернитесь на главную",
     "404.button": "Вернуться на главную",
@@ -128,7 +126,8 @@ export const ui = {
     "contacts.writeEmail": "Написать письмо",
     "contacts.copyEmail": "Скопировать email",
     "contacts.copied": "Email скопирован",
-    "contacts.copyError": "Не удалось скопировать. Выделите адрес и скопируйте его вручную.",
+    "contacts.copyError":
+      "Не удалось скопировать. Выделите адрес и скопируйте его вручную.",
     "contacts.socials": "Другие способы связи",
     "experience.present": "настоящее время",
     "experience.technologies": "Технологии в этой роли",

@@ -13,19 +13,32 @@ const { project, newTabLabel } = Astro.props;
 <div class="flex items-center justify-between gap-3 relative z-20 flex-col lg:flex-row">
   <div class="flex items-center gap-3 flex-wrap">
     {project.techs.map((tech) => (
-      <a href={tech.url} target="_blank" rel="noopener noreferrer"
-        title={tech.name} aria-label={`${tech.name} (${newTabLabel})`}
-        class="text-xl opacity-60 hover:opacity-90 transition-opacity duration-200">
+      <a
+        href={tech.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={tech.name}
+        aria-label={`${tech.name} (${newTabLabel})`}
+        class="text-xl opacity-60 hover:opacity-90 transition-opacity duration-200"
+      >
         <Icon name={tech.iconify_id} className="size-5" aria-hidden="true" />
       </a>
     ))}
   </div>
   {project.github_url && (
     <div>
-      <a href={project.github_url} target="_blank" rel="noopener noreferrer"
+      <a
+        href={project.github_url}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label={`GitHub: ${project.name} (${newTabLabel})`}
-        class="text-xl opacity-60 hover:opacity-90 transition-opacity duration-200">
-        <Icon name="octicon:logo-github-24" className="h-5 w-auto" aria-hidden="true" />
+        class="text-xl opacity-60 hover:opacity-90 transition-opacity duration-200"
+      >
+        <Icon
+          name="octicon:logo-github-24"
+          className="h-5 w-auto"
+          aria-hidden="true"
+        />
       </a>
     </div>
   )}

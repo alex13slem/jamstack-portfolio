@@ -88,7 +88,7 @@ collections:
         label: Short Card Description
         widget: string
         i18n: translate
-        pattern: ['^.{1,160}$', 'Use between 1 and 160 characters.']
+        pattern: ["^.{1,160}$", "Use between 1 and 160 characters."]
 
       - widget: markdown
         name: body
@@ -276,10 +276,19 @@ singletons:
         label: Site Description
         i18n: translate
 
-      - widget: image
-        name: og_image
-        label: OG Image
+      - widget: string
+        name: site_title
+        label: Search Title
+        i18n: translate
+        hint: Social images are generated automatically from site and project content.
+
+      - name: social_technologies
+        label: Home Social Image Technologies
+        widget: list
+        max: 4
+        required: false
         i18n: duplicate
+        hint: Up to four short technology names for the home page preview.
 
       - widget: object
         name: hero_contact

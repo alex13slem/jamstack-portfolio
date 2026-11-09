@@ -1,7 +1,10 @@
 <script lang="ts">
   import { cn } from "@/lib/utils/styles";
   import type { Snippet } from "svelte";
-  import type { HTMLAnchorAttributes, HTMLButtonAttributes } from "svelte/elements";
+  import type {
+    HTMLAnchorAttributes,
+    HTMLButtonAttributes,
+  } from "svelte/elements";
   import { variantsCss } from "./styles";
   import type { ButtonVariant } from "./types";
 
@@ -33,16 +36,23 @@
     ...attributes
   }: Props = $props();
 
-  const rootClass = $derived(cn(
-    variantsCss.root[variant],
-    "site-button inline-flex relative rounded-full font-medium text-base group z-0",
-    disabled ? "grayscale cursor-not-allowed" : "cursor-pointer",
-    className
-  ));
+  const rootClass = $derived(
+    cn(
+      variantsCss.root[variant],
+      "site-button group relative z-0 inline-flex rounded-full text-base font-medium",
+      disabled ? "cursor-not-allowed grayscale" : "cursor-pointer",
+      className,
+    ),
+  );
 </script>
 
 {#snippet content()}
-  <span class={cn(variantsCss.text[variant], "inline-block px-7 py-3 rounded-full z-10 relative")}>
+  <span
+    class={cn(
+      variantsCss.text[variant],
+      "relative z-10 inline-block rounded-full px-7 py-3",
+    )}
+  >
     {@render children()}
   </span>
   {#if !disabled && variant !== "subtle"}
@@ -52,10 +62,12 @@
 
 {#if href !== undefined}
   <a
-    {...(attributes as HTMLAnchorAttributes)}
+    {...attributes as HTMLAnchorAttributes}
     href={disabled ? undefined : href}
     target={external ? "_blank" : target}
-    rel={external || target === "_blank" ? `noopener noreferrer ${rel ?? ""}`.trim() : rel}
+    rel={external || target === "_blank"
+      ? `noopener noreferrer ${rel ?? ""}`.trim()
+      : rel}
     aria-disabled={disabled || undefined}
     tabindex={disabled ? -1 : attributes.tabindex}
     data-variant={variant}
@@ -64,7 +76,13 @@
     {@render content()}
   </a>
 {:else}
-  <button {...(attributes as HTMLButtonAttributes)} {type} {disabled} data-variant={variant} class={rootClass}>
+  <button
+    {...attributes as HTMLButtonAttributes}
+    {type}
+    {disabled}
+    data-variant={variant}
+    class={rootClass}
+  >
     {@render content()}
   </button>
 {/if}

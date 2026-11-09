@@ -12,15 +12,18 @@ export function useTranslations(lang: Lang) {
   };
 }
 
+export function unlocalizedPath(pathname: string) {
+  const segments = pathname.split("/");
+  while (Object.hasOwn(ui, segments[1])) segments.splice(1, 1);
+  return segments.join("/") || "/";
+}
+
 export function useTranslatedPath(lang: keyof typeof ui) {
   return function translatePath(path: string, targetLang: Lang = lang) {
     if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(path)) return path;
     const url = new URL(path, "https://portfolio.invalid");
-    const segments = url.pathname.split("/");
-    // Replace language prefixes instead of adding another one on each switch.
-    while (Object.hasOwn(ui, segments[1])) segments.splice(1, 1);
-    const pathname = segments.join("/") || "/";
-    const prefix = !showDefaultLang && targetLang === defaultLang ? "" : `/${targetLang}`;
-    return `${prefix}${pathname}${url.search}${url.hash}`;
+    const prefix =
+      !showDefaultLang && targetLang === defaultLang ? "" : `/${targetLang}`;
+    return `${prefix}${unlocalizedPath(url.pathname)}${url.search}${url.hash}`;
   };
 }

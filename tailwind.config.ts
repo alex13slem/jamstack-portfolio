@@ -1,4 +1,5 @@
 import typography from "@tailwindcss/typography";
+import { brand } from "./src/common/brand";
 import colors from "tailwindcss/colors";
 import defaultTheme from "tailwindcss/defaultTheme";
 
@@ -28,8 +29,8 @@ export default {
           to: { height: "0" },
         },
         "logo-animation": {
-          "0%": { filter: "drop-shadow(0 0 8px #f2cb9fbd)" },
-          "100%": { filter: "drop-shadow(0 0 15px #f2cb9f)" },
+          "0%": { filter: `drop-shadow(0 0 8px ${brand.warm}bd)` },
+          "100%": { filter: `drop-shadow(0 0 15px ${brand.warm})` },
         },
       },
       animation: {
@@ -41,14 +42,14 @@ export default {
     colors: {
       ...colors,
       black: "#111",
-      bg: "#090f16",
+      bg: brand.background,
       white: "#ffffff",
-      cyan: "#b9bcfe",
-      yellow: "#f2cb9f",
+      cyan: brand.accent,
+      yellow: brand.warm,
       transparent: "transparent",
       current: "currentColor",
-      cyangrey: "#DFE5EC",
-      yellowgrey: "#c8c8c3",
+      cyangrey: brand.text,
+      yellowgrey: brand.muted,
       darkgrey: "#1b2227",
     },
     container: {

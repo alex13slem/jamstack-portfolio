@@ -4,7 +4,11 @@
   backdrop-filter: blur(12px);
 }
 
-.site-header__actions { display: flex; align-items: center; gap: 0.5rem; }
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 .language-link {
   width: 44px;
   height: 44px;
@@ -31,10 +35,17 @@
   font-size: 16px;
   transition: color 0.2s;
 }
-.back-to-projects:hover { color: #fff; }
+.back-to-projects:hover {
+  color: #fff;
+}
 
-.contact-copy:disabled { cursor: wait; opacity: 0.7; }
-.contact-copy[hidden] { display: none; }
+.contact-copy:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+.contact-copy[hidden] {
+  display: none;
+}
 .contact-socials {
   display: flex;
   flex-wrap: wrap;
@@ -51,4 +62,6 @@
   font-weight: 500;
   transition: color 0.2s;
 }
-.contact-social-link:hover { color: #fff; }
+.contact-social-link:hover {
+  color: #fff;
+}

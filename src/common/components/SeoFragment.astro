@@ -1,33 +1,74 @@
 ---
-import config from "@/common/config.json";
-import { getLangFromUrl } from "@/i18n/utils";
-import OpenGraphFragment from "./open-graph-fragment/OpenGraphFragment.astro";
-import type { OpenGraphFragmentProps } from "./open-graph-fragment/types";
+import { SEO } from "astro-seo";
+import { escapeText } from "entities";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/common/config";
+import { locales, localeTags } from "@/i18n/locales";
+import { getLangFromUrl, unlocalizedPath } from "@/i18n/utils";
+import { absoluteUrl, canonicalPath, socialImageSize } from "@/lib/seo/site";
+import { getSocialCard } from "@/lib/seo/social";
 
-interface Props extends Omit<OpenGraphFragmentProps, "siteName"> {
-  keywords?: string;
+interface Props {
+  title: string;
+  description?: string;
+  projectId?: string;
   noindex?: boolean;
 }
-
-const lang = getLangFromUrl(Astro.url);
-const siteName = config[lang].site_name;
-const baseOgImageUrl = config[lang].og_image;
 const {
-  keywords,
-  description: _description,
   title,
+  description: customDescription,
+  projectId,
   noindex = false,
-  imageUrls = { fb: baseOgImageUrl },
-  ...props
 } = Astro.props;
-
-const description = _description || config[lang].site_description;
+const lang = getLangFromUrl(Astro.url);
+const site = config[lang];
+const description = customDescription ?? site.site_description;
+const pathname = canonicalPath(Astro.url.pathname);
+const canonical = absoluteUrl(pathname);
+const card = await getSocialCard(lang, projectId);
+const image = absoluteUrl(card.imagePath);
+const fullTitle = `${title} | ${site.site_name}`;
+const alternates: { hrefLang: string; href: string }[] = locales.map(
+  (locale) => ({
+    hrefLang: locale,
+    href: absoluteUrl(getRelativeLocaleUrl(locale, unlocalizedPath(pathname))),
+  }),
+);
+alternates.push({
+  hrefLang: "x-default",
+  href: alternates.find((item) => item.hrefLang === "en")!.href,
+});
 ---
 
-<>
-  {keywords && <meta name="keywords" content={keywords} />}
-  <meta name="description" content={description} />
-  <OpenGraphFragment {description} {title} {siteName} {imageUrls} {...props} />
-  {noindex && <meta name="robots" content="noindex" />}
-  <title>{siteName} · {title}</title>
-</>
+<!-- astro-seo renders title as HTML; escape CMS text before passing it. -->
+<SEO
+  title={escapeText(fullTitle)}
+  {description}
+  {noindex}
+  canonical={noindex ? null : canonical}
+  languageAlternates={noindex ? undefined : alternates}
+  openGraph={{
+    basic: { title: fullTitle, type: "website", url: canonical, image },
+    optional: {
+      siteName: site.site_name,
+      description,
+      locale: localeTags[lang],
+      localeAlternate: locales
+        .filter((locale) => locale !== lang)
+        .map((locale) => localeTags[locale]),
+    },
+    image: {
+      secureUrl: image,
+      type: "image/png",
+      ...socialImageSize,
+      alt: card.alt,
+    },
+  }}
+  twitter={{
+    card: "summary_large_image",
+    title: fullTitle,
+    description,
+    image,
+    imageAlt: card.alt,
+  }}
+/>

@@ -37,7 +37,7 @@
   data-email={email}
 >
   <a
-    class="contact-email__address inline-block max-w-full text-[clamp(1.125rem,2.5vw,1.75rem)] leading-[1.4] font-semibold text-cyangrey transition-colors hover:text-white [overflow-wrap:anywhere]"
+    class="contact-email__address inline-block max-w-full text-[clamp(1.125rem,2.5vw,1.75rem)] leading-[1.4] font-semibold [overflow-wrap:anywhere] text-cyangrey transition-colors hover:text-white"
     href={`mailto:${email}`}>{email}</a
   >
   <div class="mt-6 flex flex-wrap items-center justify-center gap-3">

@@ -1,14 +1,9 @@
 {
   "en": {
     "site_name": "alex13slem",
-    "site_description": "Hi 👋! I’m Sasha, a full-stack JavaScript developer.\nI help small businesses build fast, stylish, and SEO-optimized websites.\nI live in Belarus and work with clients all around the world.",
-    "og_image": "/media/site-info/portfolio-thumb1.png",
+    "site_description": "I build content-managed websites, client portals and ERP integrations. Full-stack development with TypeScript, Svelte, Next.js and Python.",
     "section_hero": {
-      "epithets": [
-        "Full-stack",
-        "Frontend",
-        "Backend"
-      ],
+      "epithets": ["Full-stack", "Frontend", "Backend"],
       "epithet_summary": "developer",
       "greeting": "I build content-managed websites, client portals and ERP integrations. My work covers interfaces, server-side logic and deployment."
     },
@@ -28,18 +23,15 @@
     "hero_contact": {
       "email": "o.s.shcherba@gmail.com",
       "phone": "+375 (29) 623-41-63"
-    }
+    },
+    "site_title": "Full-stack developer — websites and integrations",
+    "social_technologies": ["TypeScript", "Svelte", "Next.js", "Python"]
   },
   "ru": {
     "site_name": "alex13slem",
-    "site_description": "Привет 👋! Я Саша, full-stack разработчик на JavaScript.\nПомогаю малому бизнесу создавать быстрые, стильные и SEO-оптимизированные сайты.\nЖиву в Беларуси, работаю с клиентами по всему миру.",
-    "og_image": "/media/site-info/portfolio-thumb1.png",
+    "site_description": "Разрабатываю сайты с управлением контентом, клиентские порталы и интеграции с ERP. Интерфейсы, серверная логика и развёртывание.",
     "section_hero": {
-      "epithets": [
-        "Full-stack",
-        "Frontend",
-        "Backend"
-      ],
+      "epithets": ["Full-stack", "Frontend", "Backend"],
       "epithet_summary": "разработчик",
       "greeting": "Разрабатываю сайты с управлением контентом, клиентские порталы и интеграции с ERP. Работаю над интерфейсом, серверной логикой и развёртыванием."
     },
@@ -59,6 +51,8 @@
     "hero_contact": {
       "email": "a.s.scherba@yandex.by",
       "phone": "+7 980 104-1005"
-    }
+    },
+    "site_title": "Full-stack разработчик — сайты и интеграции",
+    "social_technologies": ["TypeScript", "Svelte", "Next.js", "Python"]
   }
 }

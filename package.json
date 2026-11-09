@@ -7,19 +7,29 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc --noEmit",
-    "check:pages": "node scripts/check-accessibility.mjs && node scripts/check-navigation.mjs"
+    "check": "astro check && svelte-check --tsconfig ./tsconfig.json",
+    "check:pages": "node scripts/check-accessibility.mjs && tsx scripts/check-navigation.mjs && npm run check:seo",
+    "check:seo": "node scripts/check-seo.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/svelte": "^7.1.0",
     "@fontsource/source-sans-3": "^5.2.8",
     "@iconify/svelte": "^5.0.1",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.2",
+    "astro-favicons": "^3.1.8",
     "astro-iconify": "^1.2.0",
+    "astro-seo": "^1.2.0",
     "clsx": "^2.1.1",
+    "entities": "^9.0.0",
     "hover-effect": "^1.2.1",
     "marked": "^16.2.0",
+    "satori": "^0.63.2",
+    "satori-html": "^0.3.2",
+    "sharp": "^0.35.5",
     "svelte": "^5.38.2",
     "svelte-sonner": "^1.0.5",
     "swiper": "^14.4.0",
@@ -28,7 +38,18 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "@tailwindcss/typography": "^0.5.16",
-    "svelte-check": "^4.7.8"
+    "cheerio": "^1.2.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "svelte-check": "^4.7.8",
+    "tsx": "^4.23.15",
+    "yaml": "^2.9.1"
+  },
+  "overrides": {
+    "sharp": "$sharp"
   }
 }

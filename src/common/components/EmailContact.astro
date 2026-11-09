@@ -1,8 +1,20 @@
 ---
 import EmailContact from "./EmailContact.svelte";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-interface Props { email: string; }
+interface Props {
+  email: string;
+}
 const { email } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
-<EmailContact {email} labels={{ write: t("contacts.writeEmail"), copy: t("contacts.copyEmail"), copied: t("contacts.copied"), error: t("contacts.copyError") }} client:visible />
+
+<EmailContact
+  {email}
+  labels={{
+    write: t("contacts.writeEmail"),
+    copy: t("contacts.copyEmail"),
+    copied: t("contacts.copied"),
+    error: t("contacts.copyError"),
+  }}
+  client:visible
+/>

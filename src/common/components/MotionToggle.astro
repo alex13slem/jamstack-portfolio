@@ -3,7 +3,17 @@ import MotionToggle from "./MotionToggle.svelte";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 const t = useTranslations(getLangFromUrl(Astro.url));
 ---
-<MotionToggle labels={{ label: t("motion.label"), short: t("motion.shortLabel"), on: t("motion.on"), off: t("motion.off"), reduced: t("motion.reduced") }} client:load />
+
+<MotionToggle
+  labels={{
+    label: t("motion.label"),
+    short: t("motion.shortLabel"),
+    on: t("motion.on"),
+    off: t("motion.off"),
+    reduced: t("motion.reduced"),
+  }}
+  client:load
+/>
 <script>
   import { initializeMotion } from "@/common/scripts/motion";
   initializeMotion();

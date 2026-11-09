@@ -14,12 +14,15 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <section
-  class={cn(`project-thumbnail p-[2px] overflow-clip z-10
+  class={cn(
+    `project-thumbnail p-[2px] overflow-clip z-10
             rounded-xl animate-gradient__rotate animate-gradient__activeXs
-            relative group aspect-[4/3] w-full min-h-0 shrink-0 self-start`, className)}
+            relative group aspect-[4/3] w-full min-h-0 shrink-0 self-start`,
+    className,
+  )}
 >
-  {
-    site_url && (
+  {site_url && (
+    <>
       <a
         class="project-thumbnail__link absolute inset-0 z-10 flex items-end justify-end p-4 rounded-xl"
         href={site_url}
@@ -32,8 +35,8 @@ const t = useTranslations(getLangFromUrl(Astro.url));
         </span>
       </a>
       <i aria-hidden="true"></i>
-    )
-  }
+    </>
+  )}
   <div
     class={cn(`bg-white/5 backdrop-blur-sm
                 rounded-[10px] border border-white/10

@@ -23,7 +23,7 @@ export const variantsCss: VariantsCss = {
   },
   i: {
     fill: `
-      bg-black bg-opacity-40 transition-opacity duration-200
+      bg-black/40 transition-opacity duration-200
       opacity-0 group-hover:opacity-100 w-2/3 h-[8px] absolute
       -bottom-1 left-1/2 -z-1 -translate-x-1/2 blur-md`,
     bordered: ``,

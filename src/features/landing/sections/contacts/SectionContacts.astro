@@ -1,7 +1,7 @@
 ---
 import linesPNG from "@/assets/img/Lines.png";
 import EmailContact from "@/common/components/EmailContact.astro";
-import configJson from "@/common/config.json";
+import configJson from "@/common/config";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 import { getSocials } from "@/lib/cruds/social";
 import { cn } from "@/lib/utils/styles";
@@ -13,7 +13,9 @@ const t = useTranslations(lang);
 
 const section = configJson[lang].section_contacts;
 const { email } = configJson[lang].hero_contact;
-const socials = (await getSocials(lang)).sort((a, b) => a.id.localeCompare(b.id, "en"));
+const socials = (await getSocials(lang)).sort((a, b) =>
+  a.id.localeCompare(b.id, "en"),
+);
 ---
 
 <section id="contacts" class="pt-36 pb-44 md:py-36">
@@ -34,8 +36,7 @@ container max-w-5xl relative md:overflow-visible`)}
   absolute bottom-0 md:top-0 translate-y-1/3  md:-translate-y-2/3
   gradient-experience__1 blur-3xl md:blur-[150px] opacity-100 z-10
   `)}
-      >
-      </div>
+      ></div>
     </div>
     <h2
       class={cn(`
@@ -52,19 +53,18 @@ font-bold text-4xl sm:text-5xl bg-clip-text white_gradient text-transparent lead
     </p>
     <EmailContact {email} />
     <nav class="contact-socials" aria-label={t("contacts.socials")}>
-      {
-        socials.map((social) => (
-          <a class="contact-social-link" href={social.url} target="_blank" rel="noopener noreferrer"
-            aria-label={`${social.name} (${t("links.newTab")})`}>
-            <Icon
-              name={social.iconify_id}
-              class="size-5"
-              aria-hidden="true"
-            />
-            <span>{social.name}</span>
-          </a>
-        ))
-      }
+      {socials.map((social) => (
+        <a
+          class="contact-social-link"
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${social.name} (${t("links.newTab")})`}
+        >
+          <Icon name={social.iconify_id} class="size-5" aria-hidden="true" />
+          <span>{social.name}</span>
+        </a>
+      ))}
     </nav>
   </div>
 </section>

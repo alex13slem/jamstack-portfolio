@@ -1,13 +1,15 @@
 ---
 import Button from "@/common/components/ui/button/Button.svelte";
-import configJson from "@/common/config.json";
+import configJson from "@/common/config";
 import {
   getLangFromUrl,
   useTranslatedPath,
   useTranslations,
 } from "@/i18n/utils";
 
-interface Props { languageFallback?: string; }
+interface Props {
+  languageFallback?: string;
+}
 const { languageFallback } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const config = configJson[lang];
@@ -24,19 +26,28 @@ const otherLang = lang === "ru" ? "en" : "ru";
       {config.site_name}
     </a>
     <div class="site-header__actions">
-      <Button variant="subtle" class="language-link" data-language={otherLang}
+      <Button
+        variant="subtle"
+        class="language-link"
+        data-language={otherLang}
         data-language-path={languageFallback}
-        href={translatePath(languageFallback ?? Astro.url.pathname + Astro.url.search, otherLang)}
-        hreflang={otherLang} lang={otherLang}
-        aria-label={`${otherLang.toUpperCase()}: ${t("nav.switchLanguage")}`} title={t("nav.switchLanguage")}>
+        href={translatePath(
+          languageFallback ?? Astro.url.pathname + Astro.url.search,
+          otherLang,
+        )}
+        hreflang={otherLang}
+        lang={otherLang}
+        aria-label={`${otherLang.toUpperCase()}: ${t("nav.switchLanguage")}`}
+        title={t("nav.switchLanguage")}
+      >
         {otherLang.toUpperCase()}
       </Button>
-      <Button href={`mailto:${email}`} class="[&>span]:px-5 sm:[&>span]:px-7">{t("contact_btn_label")}</Button>
+      <Button href={`mailto:${email}`} class="[&>span]:px-5 sm:[&>span]:px-7">
+        {t("contact_btn_label")}
+      </Button>
     </div>
   </div>
-  <hr
-    class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent"
-  />
+  <hr class="border-none h-px opacity-15 bg-gradient-to-r from-transparent via-white to-transparent" />
 </header>
 
 <script>

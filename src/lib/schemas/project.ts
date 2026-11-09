@@ -12,10 +12,14 @@ export const ProjectCollectionSchema = z.object({
   image_cover: z.string(),
   image_preview: z.string(),
   techs: z.array(reference("tech")),
-  gallery: z.array(z.object({
-    image: z.string().startsWith("/media/"),
-    alt: z.string().trim().min(1),
-    caption: z.string().trim().default(""),
-  })).default([]),
+  gallery: z
+    .array(
+      z.object({
+        image: z.string().startsWith("/media/"),
+        alt: z.string().trim().min(1),
+        caption: z.string().trim().default(""),
+      }),
+    )
+    .default([]),
 });
 export type Project = z.infer<typeof ProjectCollectionSchema>;

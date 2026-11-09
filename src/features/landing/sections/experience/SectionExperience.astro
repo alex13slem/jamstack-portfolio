@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
-import configJson from "@/common/config.json";
+import configJson from "@/common/config";
 import { getExperienceWithTechnologies } from "@/lib/cruds/experience";
 import { getSocials } from "@/lib/cruds/social";
 import Icon from "astro-iconify";
@@ -9,39 +9,76 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const section = configJson[lang].section_experience;
 const entries = await getExperienceWithTechnologies(lang);
-const linkedin = (await getSocials(lang)).find((social) => social.id === "linkedin");
+const linkedin = (await getSocials(lang)).find(
+  (social) => social.id === "linkedin",
+);
 const monthFormat = new Intl.DateTimeFormat(lang === "ru" ? "ru-RU" : "en-US", {
-  month: "short", year: "numeric", timeZone: "UTC",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
 });
-const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T00:00:00Z`));
+const formatMonth = (month: string) =>
+  monthFormat.format(new Date(`${month}-01T00:00:00Z`));
 ---
 
 {entries.length > 0 && (
-  <section id="experience" class="experience" aria-labelledby="experience-title">
+  <section
+    id="experience"
+    class="experience"
+    aria-labelledby="experience-title"
+  >
     <div class="container experience__container">
-      <h2 id="experience-title" class="experience__title text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase">{section.title}</h2>
+      <h2
+        id="experience-title"
+        class="experience__title text-center bg-clip-text text-transparent text-sm font-extrabold white_gradient uppercase"
+      >
+        {section.title}
+      </h2>
       <ol role="list" class="experience__list">
         {entries.map((entry) => (
           <li class="experience__entry" data-experience={entry.id}>
             <div class="experience__period">
-              <time datetime={entry.start_date}>{formatMonth(entry.start_date)}</time>
+              <time datetime={entry.start_date}>
+                {formatMonth(entry.start_date)}
+              </time>
               <span aria-hidden="true"> — </span>
-              {entry.end_date
-                ? <time datetime={entry.end_date}>{formatMonth(entry.end_date)}</time>
-                : <span class="experience__present">{t("experience.present")}</span>}
+              {entry.end_date ? (
+                <time datetime={entry.end_date}>
+                  {formatMonth(entry.end_date)}
+                </time>
+              ) : (
+                <span class="experience__present">
+                  {t("experience.present")}
+                </span>
+              )}
             </div>
             <div class="experience__content">
-              <h3 class="experience__company" translate="no">{entry.company}</h3>
+              <h3 class="experience__company" translate="no">
+                {entry.company}
+              </h3>
               <p class="experience__role">{entry.role}</p>
-              {entry.work_mode && <p class="experience__mode">{entry.work_mode}</p>}
+              {entry.work_mode && (
+                <p class="experience__mode">{entry.work_mode}</p>
+              )}
               <div class="experience__description">
-                {entry.description.split(/\n\s*\n/).map((paragraph) => <p>{paragraph}</p>)}
+                {entry.description.split(/\n\s*\n/).map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
               </div>
               {entry.techs.length > 0 && (
-                <ul role="list" class="experience__techs" aria-label={t("experience.technologies")}>
+                <ul
+                  role="list"
+                  class="experience__techs"
+                  aria-label={t("experience.technologies")}
+                >
                   {entry.techs.map((tech) => (
                     <li class="experience__tech" translate="no">
-                      <Icon name={tech.iconify_id} width="20" height="20" aria-hidden="true" />
+                      <Icon
+                        name={tech.iconify_id}
+                        width="20"
+                        height="20"
+                        aria-hidden="true"
+                      />
                       <span>{tech.name}</span>
                     </li>
                   ))}
@@ -51,19 +88,33 @@ const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T
           </li>
         ))}
       </ol>
-      {linkedin && <a class="experience__profile" href={linkedin.url}>
-        {section.profile_link_label}
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M7 17 17 7M7 7h10v10" />
-        </svg>
-      </a>}
+      {linkedin && (
+        <a class="experience__profile" href={linkedin.url}>
+          {section.profile_link_label}
+          <svg
+            aria-hidden="true"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M7 17 17 7M7 7h10v10" />
+          </svg>
+        </a>
+      )}
     </div>
   </section>
 )}
 
 <style>
-  .experience { padding-block: clamp(6rem, 10vw, 9rem) 4rem; }
-  .experience__container { max-width: 64rem; }
+  .experience {
+    padding-block: clamp(6rem, 10vw, 9rem) 4rem;
+  }
+  .experience__container {
+    max-width: 64rem;
+  }
   .experience__title {
     margin-bottom: 2rem;
     text-wrap: balance;
@@ -73,17 +124,28 @@ const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T
     gap: 1rem;
     padding-block: 2rem;
   }
-  .experience__entry + .experience__entry { border-top: 1px solid rgb(223 229 236 / 12%); }
-  .experience__entry:first-child { padding-block-start: 0; }
+  .experience__entry + .experience__entry {
+    border-top: 1px solid rgb(223 229 236 / 12%);
+  }
+  .experience__entry:first-child {
+    padding-block-start: 0;
+  }
   .experience__period {
     color: #c8c8c3;
     font-size: 1rem;
     line-height: 1.6;
     font-variant-numeric: tabular-nums;
   }
-  .experience__period time, .experience__present { display: inline-block; }
-  .experience__present { color: #b9bcfe; }
-  .experience__content { min-width: 0; }
+  .experience__period time,
+  .experience__present {
+    display: inline-block;
+  }
+  .experience__present {
+    color: #b9bcfe;
+  }
+  .experience__content {
+    min-width: 0;
+  }
   .experience__company {
     color: #dfe5ec;
     font-size: clamp(1.375rem, 2.5vw, 1.5rem);
@@ -99,7 +161,11 @@ const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T
     font-size: 1.125rem;
     line-height: 1.5;
   }
-  .experience__mode { margin-top: 0.25rem; color: #c8c8c3; font-size: 1rem; }
+  .experience__mode {
+    margin-top: 0.25rem;
+    color: #c8c8c3;
+    font-size: 1rem;
+  }
   .experience__description {
     max-width: 65ch;
     margin-top: 1.25rem;
@@ -109,10 +175,25 @@ const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T
     overflow-wrap: anywhere;
     text-wrap: pretty;
   }
-  .experience__description p + p { margin-top: 0.75rem; }
-  .experience__techs { display: flex; flex-wrap: wrap; gap: 0.625rem 1.25rem; margin-top: 1.25rem; }
-  .experience__tech { display: inline-flex; align-items: center; gap: 0.375rem; color: #c8c8c3; font-size: 0.9375rem; }
-  .experience__tech :global(svg) { flex-shrink: 0; }
+  .experience__description p + p {
+    margin-top: 0.75rem;
+  }
+  .experience__techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .experience__tech {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    color: #c8c8c3;
+    font-size: 0.9375rem;
+  }
+  .experience__tech :global(svg) {
+    flex-shrink: 0;
+  }
   .experience__profile {
     display: inline-flex;
     align-items: center;
@@ -123,11 +204,22 @@ const formatMonth = (month: string) => monthFormat.format(new Date(`${month}-01T
     text-decoration: underline;
     text-decoration-color: rgb(200 200 195 / 40%);
     text-underline-offset: 0.3em;
-    transition: color 0.2s, text-decoration-color 0.2s;
+    transition:
+      color 0.2s,
+      text-decoration-color 0.2s;
   }
-  .experience__profile:hover { color: #fff; text-decoration-color: currentColor; }
+  .experience__profile:hover {
+    color: #fff;
+    text-decoration-color: currentColor;
+  }
   @media (min-width: 768px) {
-    .experience__entry { grid-template-columns: 12.5rem minmax(0, 1fr); gap: 2.5rem; padding-block: 2.5rem; }
-    .experience__period { padding-top: 0.25rem; }
+    .experience__entry {
+      grid-template-columns: 12.5rem minmax(0, 1fr);
+      gap: 2.5rem;
+      padding-block: 2.5rem;
+    }
+    .experience__period {
+      padding-top: 0.25rem;
+    }
   }
 </style>

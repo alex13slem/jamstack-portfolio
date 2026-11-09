@@ -21,9 +21,9 @@ const { project } = Astro.props;
 <Layout>
   <SeoFragment
     slot="head"
-    title={project.name}
+    title={`${project.name} — ${project.role}`}
     description={project.description}
-    imageUrls={{ fb: project.image_cover }}
+    projectId={project.id}
   />
 
   <DetailPage {project} />

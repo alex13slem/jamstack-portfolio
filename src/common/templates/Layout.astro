@@ -32,7 +32,7 @@ const t = useTranslations(lang);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="origin" />
     <meta name="theme-color" content="#090f16" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <slot name="head" />
 
@@ -46,16 +46,16 @@ const t = useTranslations(lang);
       min-h-svh
       tracking-wide
       text-white`,
-      className
+      className,
     )}
   >
-    <a href="#main-content" class="skip-link">{t("a11y.skipContent")}</a>
+    <a href="#main-content" class="skip-link">
+      {t("a11y.skipContent")}
+    </a>
     <MotionToggle />
-    <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise">
-    </div>
+    <div class="fixed inset-0 -z-10 pointer-events-none opacity-90 bg-noise"></div>
     <Header {languageFallback} />
     <slot />
     <Footer />
-
   </body>
 </html>
